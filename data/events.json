@@ -1,0 +1,92 @@
+[
+  {
+    "guid": "32542cbe-1a7d-4677-822c-d02579d14503",
+    "name": "Sticker Summer Solstice 3",
+    "category": "events",
+    "subcategory": "Турнир Лучника",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Турнир Лучника/32542cbe-1a7d-4677-822c-d02579d14503.png",
+    "created_at": "2025-11-23T17:17:54.677889+00:00"
+  },
+  {
+    "guid": "1235a23c-e207-465a-b53d-709b09762f9d",
+    "name": "Sticker Summer Solstice 4",
+    "category": "events",
+    "subcategory": "Турнир Лучника",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Турнир Лучника/1235a23c-e207-465a-b53d-709b09762f9d.png",
+    "created_at": "2025-11-23T17:18:05.710713+00:00"
+  },
+  {
+    "guid": "23293176-52a4-41eb-80b2-5e13dfa32920",
+    "name": "Sticker Summer Solstice 5",
+    "category": "events",
+    "subcategory": "Турнир Лучника",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Турнир Лучника/23293176-52a4-41eb-80b2-5e13dfa32920.png",
+    "created_at": "2025-11-23T17:18:15.154830+00:00"
+  },
+  {
+    "guid": "e5c6dd90-8e4f-4d4d-bec0-813a02f0fe6f",
+    "name": "Sticker Summer Solstice 2",
+    "category": "events",
+    "subcategory": "Турнир Лучника",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Турнир лучника/e5c6dd90-8e4f-4d4d-bec0-813a02f0fe6f.png",
+    "created_at": "2025-11-23T17:15:50.852353+00:00"
+  },
+  {
+    "guid": "ff6f0107-5f78-4cd8-8395-7c89a1640b59",
+    "name": "Sticker Summer Solstice 1",
+    "category": "events",
+    "subcategory": "Турнир Лучника",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Турнир лучника/ff6f0107-5f78-4cd8-8395-7c89a1640b59.png",
+    "created_at": "2025-11-23T17:15:32.995660+00:00"
+  },
+  {
+    "guid": "86df3ce5-42a2-4bf1-8cbe-c0433db41084",
+    "name": "Bow Summer Solsctice Legendary",
+    "category": "events",
+    "subcategory": "Турнир Лучника",
+    "type": "bow",
+    "icon_path": "assets/icons/events/Турнир Лучника/86df3ce5-42a2-4bf1-8cbe-c0433db41084.png",
+    "created_at": "2025-11-23T17:19:37.351364+00:00"
+  },
+  {
+    "guid": "703897b3-998e-4c7d-930d-42df428fc550",
+    "name": "Beard Summer Solsctice Epic",
+    "category": "events",
+    "subcategory": "Турнир Лучника",
+    "type": "beard",
+    "icon_path": "assets/icons/events/Турнир Лучника/703897b3-998e-4c7d-930d-42df428fc550.png",
+    "created_at": "2025-11-23T17:20:09.971055+00:00"
+  },
+  {
+    "guid": "a44bb583-a933-4607-a9eb-ae07b459fab8",
+    "name": "Glasses Summer Solsctice Rare",
+    "category": "events",
+    "subcategory": "Турнир Лучника",
+    "type": "glasses",
+    "icon_path": "assets/icons/events/Турнир Лучника/a44bb583-a933-4607-a9eb-ae07b459fab8.png",
+    "created_at": "2025-11-23T17:20:40.181893+00:00"
+  },
+  {
+    "guid": "a7fcad6d-14ae-4084-841e-27ca5e63d664",
+    "name": "Hat Summer Solsctice Legendary",
+    "category": "events",
+    "subcategory": "Турнир Лучника",
+    "type": "hat",
+    "icon_path": "assets/icons/events/Турнир Лучника/a7fcad6d-14ae-4084-841e-27ca5e63d664.png",
+    "created_at": "2025-11-23T17:21:28.787062+00:00"
+  },
+  {
+    "guid": "8d0a410d-f775-4758-bf70-2cbe7db7df38",
+    "name": "Bow Handmade Legendary",
+    "category": "events",
+    "subcategory": "PrizeRange",
+    "type": "bow",
+    "icon_path": "assets/icons/events/PrizeRange/8d0a410d-f775-4758-bf70-2cbe7db7df38.png",
+    "created_at": "2025-11-23T17:55:52.696736+00:00"
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "category": "legacy",
+    "created_at": "2025-11-23T10:59:49.708563+00:00",
+    "guid": "188d669f-7af7-424f-a64f-f498ba8af486",
+    "icon_path": "assets/icons/all/188d669f-7af7-424f-a64f-f498ba8af486.png",
+    "name": "Beard Santa",
+    "subcategory": null,
+    "type": "beard"
+  },
+  {
+    "category": "legacy",
+    "created_at": "2025-11-23T11:01:02.467715+00:00",
+    "guid": "8eec3cc4-55ab-4e7a-a9f1-1ea07604adab",
+    "icon_path": "assets/icons/all/8eec3cc4-55ab-4e7a-a9f1-1ea07604adab.png",
+    "name": "Beard Jabot",
+    "subcategory": null,
+    "type": "beard"
+  }
+]

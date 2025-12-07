@@ -1,0 +1,200 @@
+[
+  {
+    "guid": "b1cce5d4-4136-4ca5-81b1-2648d3f07a3b",
+    "name": "Hat DeadpoolWolverine Epic 1",
+    "category": "offers",
+    "subcategory": "Deadpool",
+    "type": "hat",
+    "icon_path": "assets/icons/offers/Deadpool/b1cce5d4-4136-4ca5-81b1-2648d3f07a3b.png",
+    "created_at": "2025-11-23T17:38:47.164351+00:00"
+  },
+  {
+    "guid": "5ad1e583-7f86-4841-8c22-0234fb203f40",
+    "name": "Hat DeadpoolWolverine Epic 2",
+    "category": "offers",
+    "subcategory": "Deadpool",
+    "type": "hat",
+    "icon_path": "assets/icons/offers/Deadpool/5ad1e583-7f86-4841-8c22-0234fb203f40.png",
+    "created_at": "2025-11-23T17:38:58.090260+00:00"
+  },
+  {
+    "guid": "8384bb1b-cac7-42af-8a01-3931c0fe733e",
+    "name": "Bow DeadpoolWolverine Legendary",
+    "category": "offers",
+    "subcategory": "Deadpool",
+    "type": "bow",
+    "icon_path": "assets/icons/offers/Deadpool/8384bb1b-cac7-42af-8a01-3931c0fe733e.png",
+    "created_at": "2025-11-23T17:39:29.973621+00:00"
+  },
+  {
+    "guid": "39582659-3550-46c3-bc0a-6f1988faa16f",
+    "name": "Sticker DeadpoolWolverine 1",
+    "category": "offers",
+    "subcategory": "Deadpool",
+    "type": "stickers",
+    "icon_path": "assets/icons/offers/Deadpool/39582659-3550-46c3-bc0a-6f1988faa16f.png",
+    "created_at": "2025-11-23T17:39:49.349176+00:00"
+  },
+  {
+    "guid": "c191c891-f4fb-4e5b-a5ad-78f5825b1cc9",
+    "name": "Sticker DeadpoolWolverine 2",
+    "category": "offers",
+    "subcategory": "Deadpool",
+    "type": "stickers",
+    "icon_path": "assets/icons/offers/Deadpool/c191c891-f4fb-4e5b-a5ad-78f5825b1cc9.png",
+    "created_at": "2025-11-23T17:39:57.539889+00:00"
+  },
+  {
+    "guid": "e5eb842e-82a1-418c-9377-5f434a04e859",
+    "name": "Body Superhero Legendary",
+    "category": "offers",
+    "subcategory": "Super Hero",
+    "type": "body",
+    "icon_path": "assets/icons/offers/Super Hero/e5eb842e-82a1-418c-9377-5f434a04e859.png",
+    "created_at": "2025-11-23T20:58:52.293319+00:00"
+  },
+  {
+    "guid": "70c9e488-ef8e-4120-b50c-c90711f77dce",
+    "name": "Body Web Legendary",
+    "category": "offers",
+    "subcategory": "Web Mask",
+    "type": "body",
+    "icon_path": "assets/icons/offers/Web Mask/70c9e488-ef8e-4120-b50c-c90711f77dce.png",
+    "created_at": "2025-11-23T20:59:39.949731+00:00"
+  },
+  {
+    "guid": "1cbd2049-5776-4290-a32b-8dae80a6f6db",
+    "name": "Hat Superhero Epic1cbd2049-5776-4290-a32b-8dae80a6f6db",
+    "category": "offers",
+    "subcategory": "Super Hero",
+    "type": "hat",
+    "icon_path": "assets/icons/offers/Super Hero/1cbd2049-5776-4290-a32b-8dae80a6f6db.png",
+    "created_at": "2025-11-23T21:00:21.677037+00:00"
+  },
+  {
+    "guid": "e8ead9c5-5c20-4c57-899d-917188165da0",
+    "name": "Hat Web Epic",
+    "category": "offers",
+    "subcategory": "Web Mask",
+    "type": "hat",
+    "icon_path": "assets/icons/offers/Web Mask/e8ead9c5-5c20-4c57-899d-917188165da0.png",
+    "created_at": "2025-11-23T21:00:42.593012+00:00"
+  },
+  {
+    "guid": "611b72c5-2178-434f-970d-b5ab3872a6bb",
+    "name": "Beard Superhero Epic",
+    "category": "offers",
+    "subcategory": "Super Hero",
+    "type": "beard",
+    "icon_path": "assets/icons/offers/Super Hero/611b72c5-2178-434f-970d-b5ab3872a6bb.png",
+    "created_at": "2025-11-23T21:01:06.805866+00:00"
+  },
+  {
+    "guid": "3bb88059-3d1a-4ead-8ba3-b41d6fd81df1",
+    "name": "Sticker Superhero 1",
+    "category": "offers",
+    "subcategory": "Super Hero",
+    "type": "stickers",
+    "icon_path": "assets/icons/offers/Super Hero/3bb88059-3d1a-4ead-8ba3-b41d6fd81df1.png",
+    "created_at": "2025-11-23T21:01:36.583873+00:00"
+  },
+  {
+    "guid": "2c41e7d8-b347-4a27-9864-b44573e16d84",
+    "name": "Sticker Superhero 2",
+    "category": "offers",
+    "subcategory": "Super Hero",
+    "type": "stickers",
+    "icon_path": "assets/icons/offers/Super Hero/2c41e7d8-b347-4a27-9864-b44573e16d84.png",
+    "created_at": "2025-11-23T21:02:02.432901+00:00"
+  },
+  {
+    "guid": "1a59277c-1eb1-4ae6-a5b4-6421d882250c",
+    "name": "Sticker Web 2",
+    "category": "offers",
+    "subcategory": "Web Mask",
+    "type": "stickers",
+    "icon_path": "assets/icons/offers/Web Mask/1a59277c-1eb1-4ae6-a5b4-6421d882250c.png",
+    "created_at": "2025-11-23T21:02:20.628444+00:00"
+  },
+  {
+    "guid": "1dc32eab-392d-4d26-8ed8-a9baccee857b",
+    "name": "Sticker Web 1",
+    "category": "offers",
+    "subcategory": "Web Mask",
+    "type": "stickers",
+    "icon_path": "assets/icons/offers/Web Mask/1dc32eab-392d-4d26-8ed8-a9baccee857b.png",
+    "created_at": "2025-11-23T21:02:33.744303+00:00"
+  },
+  {
+    "guid": "e7e370d0-313c-4417-93c4-b18e01756394",
+    "name": "Bow Web Legendary",
+    "category": "offers",
+    "subcategory": "Web Mask",
+    "type": "bow",
+    "icon_path": "assets/icons/offers/Web Mask/e7e370d0-313c-4417-93c4-b18e01756394.png",
+    "created_at": "2025-11-23T21:02:59.043055+00:00"
+  },
+  {
+    "guid": "24029c5e-af8a-4a25-bc09-467548dbea0e",
+    "name": "Bow Day Of The Dead Legendary",
+    "category": "offers",
+    "subcategory": "Day Of The Dead",
+    "type": "bow",
+    "icon_path": "assets/icons/offers/Day Of The Dead/24029c5e-af8a-4a25-bc09-467548dbea0e.png",
+    "created_at": "2025-11-23T21:04:41.975832+00:00"
+  },
+  {
+    "guid": "f653ef2c-c7bd-4c9e-8d72-9ff9e0f0530f",
+    "name": "Hat Day Of The Dead Epic",
+    "category": "offers",
+    "subcategory": "Day Of The Dead",
+    "type": "hat",
+    "icon_path": "assets/icons/offers/Day Of The Dead/f653ef2c-c7bd-4c9e-8d72-9ff9e0f0530f.png",
+    "created_at": "2025-11-23T21:05:15.240849+00:00"
+  },
+  {
+    "guid": "f701ee82-6d7d-415d-a80d-ad29c3623f92",
+    "name": "Hat Day Of The Dead Epic 2",
+    "category": "offers",
+    "subcategory": "Day Of The Dead",
+    "type": "hat",
+    "icon_path": "assets/icons/offers/Day Of The Dead/f701ee82-6d7d-415d-a80d-ad29c3623f92.png",
+    "created_at": "2025-11-23T21:05:27.586947+00:00"
+  },
+  {
+    "guid": "c1d56535-e4b8-40bc-b9a1-10c582575ae9",
+    "name": "Beard Day Of The Dead Rare",
+    "category": "offers",
+    "subcategory": "Day Of The Dead",
+    "type": "beard",
+    "icon_path": "assets/icons/offers/Day Of The Dead/c1d56535-e4b8-40bc-b9a1-10c582575ae9.png",
+    "created_at": "2025-11-23T21:05:52.200098+00:00"
+  },
+  {
+    "guid": "6b40bf77-6105-4e67-a9a9-52d7c1def28c",
+    "name": "Glasses Day Of The Dead Epic",
+    "category": "offers",
+    "subcategory": "Day Of The Dead",
+    "type": "glasses",
+    "icon_path": "assets/icons/offers/Day Of The Dead/6b40bf77-6105-4e67-a9a9-52d7c1def28c.png",
+    "created_at": "2025-11-23T21:06:10.099157+00:00"
+  },
+  {
+    "guid": "2e064423-f42e-4225-9525-8c1bed353043",
+    "name": "Sticker Day Of The Dead No 1",
+    "category": "offers",
+    "subcategory": "Day Of The Dead",
+    "type": "stickers",
+    "icon_path": "assets/icons/offers/Day Of The Dead/2e064423-f42e-4225-9525-8c1bed353043.png",
+    "created_at": "2025-11-23T21:06:29.587501+00:00"
+  },
+  {
+    "guid": "2a51e1fb-a87b-430f-9a57-4438735fedfd",
+    "name": "Sticker Day Of The Dead No 2",
+    "category": "offers",
+    "subcategory": "Day Of The Dead",
+    "type": "stickers",
+    "icon_path": "assets/icons/offers/Day Of The Dead/2a51e1fb-a87b-430f-9a57-4438735fedfd.png",
+    "created_at": "2025-11-23T21:06:44.411617+00:00"
+  }
+]
