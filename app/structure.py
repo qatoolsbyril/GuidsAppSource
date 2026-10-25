@@ -4,7 +4,6 @@ import hashlib
 import json
 import uuid
 from copy import deepcopy
-from pathlib import Path
 
 from app.storage import read_json, write_json, valid_component
 
@@ -43,80 +42,44 @@ class StructureService:
         return set(project.get("subcategories", {}).get(category, [])) | {
             r["subcategory"] for r in records if r.get("category") == category and r.get("subcategory")}
 
-    def preview(self, level, action, source="", target="", category="", destination=""):
+    def preview_rename(self, level, source, target, category=""):
         if level not in {"category", "subcategory", "type"}:
-            raise ValueError("Выберите раздел структуры.")
-        allowed = {"add", "rename", "merge", "remove"}
-        if level == "subcategory":
-            allowed |= {"move", "flatten"}
-        if action not in allowed:
-            raise ValueError("Недопустимое действие.")
+            raise ValueError("Выберите категорию, подкатегорию или тип.")
         records = self.catalog.items()
         project = deepcopy(self.manager.get(self.project_id))
         names = self._names(records, project, level, category)
-        if level == "subcategory" and category not in self._names(records, project, "category", ""):
-            raise ValueError("Выберите категорию подкатегории.")
-        if action != "add" and source not in names:
-            raise ValueError("Выберите существующее название в списке.")
-        if action in {"add", "rename", "merge"}:
-            target = target.strip()
-            if not target:
-                raise ValueError("Введите новое название или выберите цель.")
-            if level != "type":
-                target = valid_component(target)
-            if target == source and action != "add":
-                raise ValueError("Выберите другое название.")
-            if action in {"add", "rename"} and target in names:
-                raise ValueError("Название уже существует. Для переноса элементов используйте объединение.")
-            if level != "type" and action in {"add", "rename"} and any(
-                    name != source and name.casefold() == target.casefold() for name in names):
-                raise ValueError("Название уже существует с другим регистром. Используйте объединение.")
-            if action == "merge" and target not in names:
-                raise ValueError("Для объединения выберите существующее название.")
-        if action == "move":
-            if destination not in self._names(records, project, "category", "") or destination == category:
-                raise ValueError("Выберите другую существующую категорию.")
+        if source not in names:
+            raise ValueError("Выберите название в дереве.")
+        target = target.strip()
+        if not target:
+            raise ValueError("Введите название.")
+        if level != "type":
+            target = valid_component(target)
+        if target == source:
+            raise ValueError("Название не изменилось.")
+        collision = target in names or (level != "type" and any(
+            name != source and name.casefold() == target.casefold() for name in names))
+        if collision:
+            raise ValueError("Такое название уже существует. Введите другое название.")
 
         def matches(rec):
-            return (rec.get(level) == source and
-                    (level != "subcategory" or rec.get("category") == category))
+            return rec.get(level) == source and (level != "subcategory" or rec.get("category") == category)
 
-        affected = [r for r in records if matches(r)] if action != "add" else []
-        if action == "remove" and affected:
-            raise ValueError("Здесь есть элементы. Сначала объедините или перенесите их в другую ветку.")
+        affected = [r for r in records if matches(r)]
         updated = deepcopy(records)
         for rec in updated:
-            if action == "add" or not matches(rec):
-                continue
-            if action in {"rename", "merge"}:
+            if matches(rec):
                 rec[level] = target
-            elif action == "flatten":
-                rec["subcategory"] = None
-            elif action == "move":
-                rec["category"] = destination
-
-        metadata_key = {"category": "categories", "type": "types"}.get(level)
         subs = project.setdefault("subcategories", {})
-        if metadata_key:
-            values = project[metadata_key]
-        else:
+        if level == "subcategory":
             values = subs.setdefault(category, [])
-        if action in {"rename", "merge", "remove", "flatten", "move"}:
-            values[:] = [name for name in values if name != source]
-        if action in {"add", "rename", "merge"} and target not in values:
+        else:
+            values = project["categories" if level == "category" else "types"]
+        values[:] = [target if name == source else name for name in values]
+        if target not in values:
             values.append(target)
-        if level == "category" and action in {"rename", "merge"}:
-            subs[target] = sorted(set(subs.get(target, [])) | set(subs.pop(source, [])))
-        if level == "category" and action == "remove":
-            if subs.get(source):
-                raise ValueError("В категории остались подкатегории. Сначала перенесите или удалите их.")
-            subs.pop(source, None)
-        if level == "subcategory" and action == "move":
-            subs[destination] = sorted(set(subs.get(destination, [])) | {source})
-        if not self._names(updated, project, "type", ""):
-            raise ValueError("В проекте должен остаться хотя бы один тип кастомизации.")
-        if not project["types"]:
-            project["types"] = sorted({r["type"] for r in updated if r.get("type")})
+        if level == "category" and source in subs:
+            subs[target] = subs.pop(source)
 
         config = deepcopy(self.manager.config)
         config["projects"] = [project if p["id"] == self.project_id else p for p in config["projects"]]
@@ -125,15 +88,14 @@ class StructureService:
             valid_component(name)
             files[self.catalog.data_dir / f"{name}.json"] = encoded_json([r for r in updated if r["category"].casefold() == name.casefold()])
 
-        # Item icon paths stay valid. Copy only group icons to their new locations.
-        moves = []
-        if level == "category" and action in {"rename", "merge"}:
+        # Existing item image paths remain valid; group icons follow renamed branches.
+        folders = []
+        if level == "category":
             for sub in self._names(records, self.manager.get(self.project_id), "subcategory", source):
-                moves.append((source, sub, target, sub))
-        if level == "subcategory" and action in {"rename", "merge", "move"}:
-            moves.append((category, source, destination if action == "move" else category,
-                          source if action == "move" else target))
-        for old_cat, old_sub, new_cat, new_sub in moves:
+                folders.append((source, sub, target, sub))
+        elif level == "subcategory":
+            folders.append((category, source, category, target))
+        for old_cat, old_sub, new_cat, new_sub in folders:
             old_folder = self.catalog.icons_dir / valid_component(old_cat) / valid_component(old_sub)
             new_folder = self.catalog.icons_dir / valid_component(new_cat) / valid_component(new_sub)
             extensions = (".png", ".jpg", ".jpeg", ".webp")
@@ -144,22 +106,34 @@ class StructureService:
                 if old_icon.is_file():
                     files[new_folder / f"icon{ext}"] = old_icon.read_bytes()
 
-        labels = {"category": "категория", "subcategory": "подкатегория", "type": "тип кастомизации"}
-        descriptions = {
-            "add": f'Добавить: {labels[level]} «{target}».',
-            "rename": f'Переименовать: «{source}» → «{target}».',
-            "merge": f'Объединить «{source}» с «{target}».',
-            "remove": f'Удалить пустое название «{source}».',
-            "flatten": f'Убрать подкатегорию «{source}», оставив её элементы в категории «{category}».',
-            "move": f'Перенести «{source}» из «{category}» в «{destination}». Совпадающие подкатегории будут объединены.',
-        }
-        description = descriptions[action]
-        if level == "subcategory" and action not in {"move", "flatten"}:
-            description += f' Только внутри категории «{category}».'
+        description = f'Переименовать «{source}» в «{target}».'
+        if level == "subcategory":
+            description += f' В категории «{category}».'
         if level == "type":
             description += " Изменится также ключ в выводе выбранных GUID."
         return {"files": files, "signature": self._signature(), "count": len(affected),
                 "description": description, "project": project}
+
+    def preview_delete_category(self, source):
+        source = valid_component(source)
+        records = self.catalog.items()
+        project = deepcopy(self.manager.get(self.project_id))
+        if source not in self._names(records, project, "category", ""):
+            raise ValueError("Выберите существующую категорию.")
+        count = sum(r.get("category") == source for r in records)
+        if count:
+            raise ValueError(f"В категории есть элементы: {count}. Сначала перенесите или удалите их.")
+        project["categories"] = [name for name in project["categories"] if name != source]
+        project.setdefault("subcategories", {}).pop(source, None)
+        config = deepcopy(self.manager.config)
+        config["projects"] = [project if p["id"] == self.project_id else p for p in config["projects"]]
+        files = {self.manager.path: encoded_json(config)}
+        # Windows can map another category with different letter case to the same file.
+        if not any(r.get("category", "").casefold() == source.casefold() for r in records):
+            files[self.catalog.data_dir / f"{source}.json"] = None
+        return {"files": files, "signature": self._signature(), "count": 0,
+                "description": f'Удалить пустую категорию «{source}».',
+                "project": project, "operation": "delete_category"}
 
     def _write_bytes(self, path, data):
         self._path(self._relative(path))

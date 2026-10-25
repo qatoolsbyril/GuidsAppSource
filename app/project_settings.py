@@ -1,6 +1,6 @@
 from PySide6.QtCore import QThread, Signal, Slot, Qt
-from PySide6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit,
-    QPushButton, QTabWidget, QListWidget, QListWidgetItem, QComboBox, QProgressBar)
+from PySide6.QtWidgets import (QWidget, QVBoxLayout, QLabel, QLineEdit,
+    QPushButton, QTabWidget, QTreeWidget, QTreeWidgetItem, QProgressBar, QHeaderView, QMessageBox)
 
 from app.structure import StructureService
 
@@ -30,211 +30,190 @@ class StructurePanel(QWidget):
         super().__init__(parent)
         self.service = StructureService(manager, project_id)
         self.is_saving = False
-        self.pending = None
         self.task = None
         layout = QVBoxLayout(self)
         self.controls = QWidget()
         controls_layout = QVBoxLayout(self.controls)
         controls_layout.setContentsMargins(0, 0, 0, 0)
-        self.tabs = QTabWidget()
-        category_page = QWidget()
-        columns = QHBoxLayout(category_page)
-        self.categories = QListWidget()
-        self.subcategories = QListWidget()
-        for title, widget in (("Категории", self.categories), ("Подкатегории", self.subcategories)):
-            column = QVBoxLayout()
-            column.addWidget(QLabel(title))
-            column.addWidget(widget)
-            columns.addLayout(column)
-        self.tabs.addTab(category_page, "Категории и подкатегории")
-        self.types = QListWidget()
-        self.tabs.addTab(self.types, "Типы кастомизации")
-        controls_layout.addWidget(self.tabs, 1)
-        self.scope = QComboBox()
-        self.scope.addItem("Категория", "category")
-        self.scope.addItem("Подкатегория выбранной категории", "subcategory")
-        self.scope.addItem("Тип кастомизации во всём проекте", "type")
-        controls_layout.addWidget(self.scope)
+        instruction = QLabel("Выберите название в дереве, измените его и нажмите «Сохранить».")
+        instruction.setWordWrap(True)
+        controls_layout.addWidget(instruction)
+        self.tree = QTreeWidget()
+        self.tree.setHeaderLabels(["Название", "Элементов"])
+        self.tree.header().setSectionResizeMode(0, QHeaderView.Stretch)
+        self.tree.header().setSectionResizeMode(1, QHeaderView.ResizeToContents)
+        controls_layout.addWidget(self.tree, 1)
         self.selected_label = QLabel()
         self.selected_label.setWordWrap(True)
+        self.selected_label.setTextFormat(Qt.PlainText)
         controls_layout.addWidget(self.selected_label)
-        self.action = QComboBox()
-        controls_layout.addWidget(self.action)
-        self.target_label = QLabel("Новое название")
-        self.target = QComboBox()
-        self.target.setEditable(True)
-        controls_layout.addWidget(self.target_label)
-        controls_layout.addWidget(self.target)
-        self.destination_label = QLabel("Категория назначения")
-        self.destination = QComboBox()
-        controls_layout.addWidget(self.destination_label)
-        controls_layout.addWidget(self.destination)
-        preview = QPushButton("Проверить изменение")
-        preview.setMinimumHeight(44)
-        preview.clicked.connect(self.preview_change)
-        controls_layout.addWidget(preview)
-        self.undo_button = QPushButton("Отменить последнее изменение структуры…")
-        self.undo_button.setMinimumHeight(44)
-        self.undo_button.clicked.connect(self.preview_undo)
+        controls_layout.addWidget(QLabel("Название"))
+        self.name = QLineEdit()
+        controls_layout.addWidget(self.name)
+        self.hint = QLabel()
+        self.hint.setWordWrap(True)
+        controls_layout.addWidget(self.hint)
+        self.save_button = QPushButton("Сохранить")
+        self.save_button.setMinimumHeight(44)
+        self.save_button.clicked.connect(self.save_name)
+        controls_layout.addWidget(self.save_button)
+        self.delete_button = QPushButton("Удалить категорию…")
+        self.delete_button.setMinimumHeight(44)
+        self.delete_button.clicked.connect(self.delete_category)
+        controls_layout.addWidget(self.delete_button)
+        self.undo_button = QPushButton("Отменить последнее изменение")
+        self.undo_button.setFlat(True)
+        self.undo_button.clicked.connect(self.undo)
         controls_layout.addWidget(self.undo_button)
         layout.addWidget(self.controls, 1)
         self.message = QLabel()
         self.message.setWordWrap(True)
         self.message.setTextFormat(Qt.PlainText)
         layout.addWidget(self.message)
-        self.confirmation = QWidget()
-        confirmation_layout = QVBoxLayout(self.confirmation)
-        confirmation_layout.setContentsMargins(0, 0, 0, 0)
-        self.confirm = QPushButton("Подтвердить изменение")
-        self.confirm.setMinimumHeight(44)
-        self.confirm.clicked.connect(self.apply_pending)
-        cancel = QPushButton("Отмена")
-        cancel.setMinimumHeight(44)
-        cancel.clicked.connect(self.cancel_preview)
-        confirmation_layout.addWidget(self.confirm)
-        confirmation_layout.addWidget(cancel)
-        layout.addWidget(self.confirmation)
-        self.confirmation.hide()
         self.progress = QProgressBar()
         self.progress.setRange(0, 0)
         self.progress.setTextVisible(False)
         layout.addWidget(self.progress)
         self.progress.hide()
-        self.categories.currentRowChanged.connect(self._category_selected)
-        self.subcategories.currentRowChanged.connect(lambda: self._select_scope("subcategory"))
-        self.types.currentRowChanged.connect(lambda: self._select_scope("type"))
-        self.tabs.currentChanged.connect(lambda index: self._select_scope("type" if index else "category"))
-        self.scope.currentIndexChanged.connect(self._scope_changed)
-        self.action.currentIndexChanged.connect(self._action_changed)
+        self.tree.currentItemChanged.connect(self._selection_changed)
+        self.name.textChanged.connect(self._name_changed)
         self.refresh()
 
-    def _value(self, widget):
-        item = widget.currentItem()
-        return item.data(Qt.UserRole) if item else ""
+    def selection(self):
+        item = self.tree.currentItem()
+        return item.data(0, Qt.UserRole) if item else None
 
-    def _fill(self, widget, names, counts):
-        selected = self._value(widget)
-        widget.blockSignals(True)
-        widget.clear()
-        for name in names:
-            item = QListWidgetItem(f"{name}  ({counts.get(name, 0)})")
-            item.setData(Qt.UserRole, name)
-            widget.addItem(item)
-        row = next((i for i in range(widget.count()) if widget.item(i).data(Qt.UserRole) == selected), 0)
-        widget.setCurrentRow(row)
-        widget.blockSignals(False)
+    def refresh(self, selected=None):
+        selected = selected or self.selection()
+        expanded = set()
 
-    def refresh(self):
+        def remember(parent):
+            for i in range(parent.childCount()):
+                item = parent.child(i)
+                value = item.data(0, Qt.UserRole)
+                if value and item.isExpanded():
+                    expanded.add((value["level"], value["source"], value["category"]))
+                remember(item)
+
+        remember(self.tree.invisibleRootItem())
         self.service.catalog = self.service.manager.catalog(self.service.project_id)
-        records = self.service.catalog.items()
-        self._fill(self.categories, self.service.catalog.categories(),
-                   {name: sum(r.get("category") == name for r in records) for name in self.service.catalog.categories()})
-        self._fill(self.types, self.service.catalog.types(),
-                   {name: sum(r.get("type") == name for r in records) for name in self.service.catalog.types()})
-        self._fill_subcategories()
-        self._scope_changed()
-        self.undo_button.setEnabled(self.service.undo_info() is not None)
-
-    def _fill_subcategories(self):
-        category = self._value(self.categories)
-        records = self.service.catalog.items()
-        names = self.service.catalog.subcategories(category)
-        self._fill(self.subcategories, names,
-                   {name: sum(r.get("category") == category and r.get("subcategory") == name for r in records) for name in names})
-
-    def _select_scope(self, level):
-        self.scope.setCurrentIndex(self.scope.findData(level))
-        self._scope_changed()
-
-    def _category_selected(self):
-        self._fill_subcategories()
-        self._select_scope("category")
-
-    def _source(self):
-        return self._value({"category": self.categories, "subcategory": self.subcategories, "type": self.types}[self.scope.currentData()])
-
-    def _scope_changed(self):
-        if self.is_saving:
-            return
-        self.cancel_preview()
-        self.selected_label.setText(f'Выбрано: {self._source() or "—"}')
-        previous = self.action.currentData()
-        self.action.blockSignals(True)
-        self.action.clear()
-        actions = [("Переименовать", "rename"), ("Объединить с существующим", "merge"),
-                   ("Добавить новое название", "add"), ("Удалить пустое название", "remove")]
-        if self.scope.currentData() == "subcategory":
-            actions += [("Перенести в другую категорию", "move"), ("Убрать подраздел, сохранить элементы", "flatten")]
-        for label, value in actions:
-            self.action.addItem(label, value)
-        index = self.action.findData(previous)
-        self.action.setCurrentIndex(max(index, 0))
-        self.action.blockSignals(False)
-        self._action_changed()
-
-    def _action_changed(self):
-        self.cancel_preview()
-        action = self.action.currentData()
-        needs_target = action in {"rename", "merge", "add"}
-        self.target_label.setVisible(needs_target)
-        self.target.setVisible(needs_target)
-        self.target_label.setText("Объединить с" if action == "merge" else "Новое название")
-        self.target.clear()
-        self.target.setEditable(action != "merge")
-        level = self.scope.currentData()
         catalog = self.service.catalog
-        names = catalog.categories() if level == "category" else catalog.types() if level == "type" else catalog.subcategories(self._value(self.categories))
-        if action == "merge":
-            self.target.addItems([n for n in names if n != self._source()])
-        else:
-            self.target.setCurrentText("")
-        self.destination_label.setVisible(action == "move")
-        self.destination.setVisible(action == "move")
-        self.destination.clear()
-        self.destination.addItems([n for n in catalog.categories() if n != self._value(self.categories)])
+        records = catalog.items()
+        self.tree.blockSignals(True)
+        self.tree.clear()
+        category_root = QTreeWidgetItem(self.tree, ["Категории и подкатегории"])
+        type_root = QTreeWidgetItem(self.tree, ["Типы кастомизации"])
+        category_root.setExpanded(True)
+        type_root.setExpanded(True)
+        selected_item = None
+        first_item = None
 
-    def preview_change(self):
+        def add(parent, level, source, category, count):
+            nonlocal selected_item, first_item
+            item = QTreeWidgetItem(parent, [source, str(count)])
+            value = {"level": level, "source": source, "category": category}
+            item.setData(0, Qt.UserRole, value)
+            if first_item is None:
+                first_item = item
+            if value == selected:
+                selected_item = item
+            item.setExpanded((level, source, category) in expanded)
+            return item
+
+        for category in catalog.categories():
+            rows = [r for r in records if r.get("category") == category]
+            category_node = add(category_root, "category", category, "", len(rows))
+            for sub in catalog.subcategories(category):
+                add(category_node, "subcategory", sub, category,
+                    sum(r.get("subcategory") == sub for r in rows))
+        for kind in catalog.types():
+            add(type_root, "type", kind, "", sum(r.get("type") == kind for r in records))
+        self.tree.setCurrentItem(selected_item or first_item)
+        if selected_item:
+            parent = selected_item.parent()
+            while parent:
+                parent.setExpanded(True)
+                parent = parent.parent()
+            self.tree.scrollToItem(selected_item)
+        self.tree.blockSignals(False)
+        self._selection_changed()
+        self.undo_button.setVisible(self.service.undo_info() is not None)
+
+    def _selection_changed(self):
+        value = self.selection()
+        labels = {"category": "Категория", "subcategory": "Подкатегория", "type": "Тип кастомизации"}
+        self.name.setEnabled(value is not None)
+        self.delete_button.setVisible(bool(value and value["level"] == "category"))
+        if value is None:
+            self.selected_label.setText("Выберите категорию, подкатегорию или тип.")
+            self.name.clear()
+            self.hint.clear()
+            return
+        location = f'{value["category"]} → ' if value["level"] == "subcategory" else ""
+        self.selected_label.setText(f'{labels[value["level"]]}: {location}{value["source"]}')
+        self.name.setText(value["source"])
+        count = self.tree.currentItem().text(1)
+        suffix = " Также изменится ключ в выводе GUID." if value["level"] == "type" else ""
+        self.hint.setText(f"Название изменится у элементов: {count}.{suffix}")
+        self._name_changed()
+
+    def _name_changed(self):
+        value = self.selection()
+        self.save_button.setEnabled(bool(value and self.name.text().strip()
+            and self.name.text().strip() != value["source"]) and not self.is_saving)
+        if not self.is_saving:
+            self.message.clear()
+
+    def save_name(self):
+        if self.is_saving or not self.selection():
+            return
+        value = self.selection()
         try:
-            plan = self.service.preview(self.scope.currentData(), self.action.currentData(),
-                source=self._source(), target=self.target.currentText(),
-                category=self._value(self.categories), destination=self.destination.currentText())
+            plan = self.service.preview_rename(value["level"], value["source"], self.name.text(), value["category"])
         except (ValueError, OSError) as error:
             self.message.setText(str(error))
             return
-        self.pending = plan
-        self.controls.setEnabled(False)
-        self.message.setText(f'{plan["description"]}\nБудет изменено элементов: {plan["count"]}.\nПеред применением будет сохранена резервная копия.')
-        self.confirmation.show()
+        plan["selection"] = dict(value, source=self.name.text().strip())
+        self._start(plan)
 
-    def preview_undo(self):
+    def undo(self):
+        if not self.is_saving:
+            self._start(None)
+
+    def _confirm_delete_category(self, source):
+        confirmation = QMessageBox(self)
+        confirmation.setWindowTitle("Удаление категории")
+        confirmation.setIcon(QMessageBox.Warning)
+        confirmation.setTextFormat(Qt.PlainText)
+        confirmation.setText(f'Удалить категорию «{source}»?')
+        confirmation.setInformativeText("Категория пуста. Её пустые подкатегории также будут удалены. Изменение можно отменить.")
+        delete = confirmation.addButton("Удалить", QMessageBox.DestructiveRole)
+        cancel = confirmation.addButton("Отмена", QMessageBox.RejectRole)
+        confirmation.setDefaultButton(cancel)
+        confirmation.setEscapeButton(cancel)
+        confirmation.exec()
+        return confirmation.clickedButton() is delete
+
+    def delete_category(self):
+        value = self.selection()
+        if self.is_saving or not value or value["level"] != "category":
+            return
         try:
-            state = self.service.undo_info()
-            if state is None:
-                raise ValueError("Нет изменения структуры для отмены.")
+            plan = self.service.preview_delete_category(value["source"])
         except (ValueError, OSError) as error:
             self.message.setText(str(error))
             return
-        self.pending = "undo"
-        self.controls.setEnabled(False)
-        self.message.setText(f'Отменить последнее изменение?\n{state["description"]}\nЭлементов: {state["count"]}. Отмена доступна, если каталог с тех пор не менялся.')
-        self.confirmation.show()
+        if self._confirm_delete_category(value["source"]):
+            self._start(plan)
 
-    def cancel_preview(self):
-        if self.is_saving:
-            return
-        self.pending = None
-        self.controls.setEnabled(True)
-        self.confirmation.hide()
-
-    def apply_pending(self):
-        if self.pending is None or self.is_saving:
-            return
+    def _start(self, plan):
         self.is_saving = True
         self.busy_changed.emit(True)
-        self.confirmation.hide()
+        self.controls.setEnabled(False)
         self.progress.show()
-        self.message.setText("Изменение структуры…")
-        self.task = StructureTask(self.service, None if self.pending == "undo" else self.pending, self)
+        deleting = plan and plan.get("operation") == "delete_category"
+        self.message.setText("Удаление категории…" if deleting else "Сохранение…" if plan else "Отмена изменения…")
+        self.task = StructureTask(self.service, plan, self)
         self.task.finished.connect(self._finished)
         self.task.start()
 
@@ -245,12 +224,13 @@ class StructurePanel(QWidget):
         self.is_saving = False
         self.busy_changed.emit(False)
         self.progress.hide()
-        self.cancel_preview()
+        self.controls.setEnabled(True)
         if task.error:
             self.message.setText(f"Не удалось применить изменение: {task.error}")
         else:
-            self.refresh()
-            self.message.setText("Структура обновлена.")
+            self.refresh(task.plan.get("selection") if task.plan else None)
+            deleting = task.plan and task.plan.get("operation") == "delete_category"
+            self.message.setText("Категория удалена." if deleting else "Название сохранено." if task.plan else "Изменение отменено.")
             self.changed.emit()
         task.deleteLater()
 
@@ -266,6 +246,10 @@ class ProjectSettingsPanel(QWidget):
         layout = QVBoxLayout(self)
         layout.addWidget(QLabel("Настройки проекта"))
         self.tabs = QTabWidget()
+        self.structure = StructurePanel(manager, project_id)
+        self.structure.changed.connect(self.changed.emit)
+        self.structure.busy_changed.connect(self._busy_changed)
+        self.tabs.addTab(self.structure, "Каталог")
         general = QWidget()
         general_layout = QVBoxLayout(general)
         general_layout.addWidget(QLabel("Название проекта"))
@@ -274,16 +258,12 @@ class ProjectSettingsPanel(QWidget):
         self.message = QLabel()
         self.message.setWordWrap(True)
         general_layout.addWidget(self.message)
-        save = QPushButton("Сохранить название проекта")
+        save = QPushButton("Сохранить")
         save.setMinimumHeight(44)
         save.clicked.connect(self._save_name)
         general_layout.addWidget(save)
         general_layout.addStretch()
         self.tabs.addTab(general, "Проект")
-        self.structure = StructurePanel(manager, project_id)
-        self.structure.changed.connect(self.changed.emit)
-        self.structure.busy_changed.connect(self._busy_changed)
-        self.tabs.addTab(self.structure, "Структура каталога")
         layout.addWidget(self.tabs, 1)
         self.back = QPushButton("Назад к GUID")
         self.back.setMinimumHeight(44)
@@ -299,11 +279,7 @@ class ProjectSettingsPanel(QWidget):
         self.back.setEnabled(not busy)
 
     def go_back(self):
-        if self.is_saving:
-            return
-        if self.structure.pending is not None:
-            self.structure.cancel_preview()
-        else:
+        if not self.is_saving:
             self.cancelled.emit()
 
     def _save_name(self):

@@ -52,7 +52,7 @@ class ProjectManager:
         self.config = read_json(self.path, {
             "active": "default",
             "projects": [{"id": "default", "name": "Основной проект",
-                          "categories": DEFAULT_CATEGORIES, "types": DEFAULT_TYPES}],
+                          "categories": list(DEFAULT_CATEGORIES), "types": list(DEFAULT_TYPES)}],
         })
 
     @property
