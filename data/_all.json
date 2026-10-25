@@ -4912,5 +4912,887 @@
     "type": "bow",
     "icon_path": "assets/icons/battle_pass/Season 24/e6ccfc20-a7f8-46cc-90c4-c2dd25d1e5ff.png",
     "created_at": "2025-11-23T21:10:59.015150+00:00"
+  },
+  {
+    "guid": "26ef4baf-07ee-4b03-a53c-15688cfc1a8a",
+    "name": "Arc",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/26ef4baf-07ee-4b03-a53c-15688cfc1a8a.png",
+    "created_at": "2025-12-07T14:41:13.644765+00:00"
+  },
+  {
+    "guid": "186d669b-995b-4205-bb95-64655f06e99e",
+    "name": "Bomb",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/186d669b-995b-4205-bb95-64655f06e99e.png",
+    "created_at": "2025-12-07T14:41:27.847550+00:00"
+  },
+  {
+    "guid": "28083015-7b5c-4c52-8984-28b7573029e9",
+    "name": "Dispel",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/28083015-7b5c-4c52-8984-28b7573029e9.png",
+    "created_at": "2025-12-07T14:50:26.895648+00:00"
+  },
+  {
+    "guid": "7b894b87-db17-4fcd-8208-b49389269034",
+    "name": "Vampire",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/7b894b87-db17-4fcd-8208-b49389269034.png",
+    "created_at": "2025-12-07T14:50:42.712659+00:00"
+  },
+  {
+    "guid": "0c825d4b-5543-4fdc-a7f3-72c7891946ea",
+    "name": "Cluster",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/0c825d4b-5543-4fdc-a7f3-72c7891946ea.png",
+    "created_at": "2025-12-07T14:50:53.214861+00:00"
+  },
+  {
+    "guid": "9314adbb-fe08-49ba-87b5-03dcc7fa04bc",
+    "name": "Fire",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/9314adbb-fe08-49ba-87b5-03dcc7fa04bc.png",
+    "created_at": "2025-12-07T14:51:07.114303+00:00"
+  },
+  {
+    "guid": "c268a9a4-e2c7-473a-b2d3-bb8ab943c787",
+    "name": "Shard",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/c268a9a4-e2c7-473a-b2d3-bb8ab943c787.png",
+    "created_at": "2025-12-07T14:51:19.649749+00:00"
+  },
+  {
+    "guid": "e60f9a83-6c15-4cb3-a287-2aa16007900c",
+    "name": "Sword",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/e60f9a83-6c15-4cb3-a287-2aa16007900c.png",
+    "created_at": "2025-12-07T14:51:29.875650+00:00"
+  },
+  {
+    "guid": "b38d3a44-531f-4222-b7af-cc6db85ea8d1",
+    "name": "Empty",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/b38d3a44-531f-4222-b7af-cc6db85ea8d1.png",
+    "created_at": "2025-12-07T14:51:43.058806+00:00"
+  },
+  {
+    "guid": "482d7360-73f6-4e70-b108-41892ebcf6f3",
+    "name": "Ice",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/482d7360-73f6-4e70-b108-41892ebcf6f3.png",
+    "created_at": "2025-12-07T14:52:08.019345+00:00"
+  },
+  {
+    "guid": "2f7ca43a-bda1-4d3c-a337-248029114ffc",
+    "name": "Laser",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/2f7ca43a-bda1-4d3c-a337-248029114ffc.png",
+    "created_at": "2025-12-07T14:52:44.997328+00:00"
+  },
+  {
+    "guid": "f89ab778-52ba-42cf-905e-036ebcaf4fcf",
+    "name": "Tesla",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/f89ab778-52ba-42cf-905e-036ebcaf4fcf.png",
+    "created_at": "2025-12-07T14:52:59.393660+00:00"
+  },
+  {
+    "guid": "e182c3e9-1767-4dad-b100-81ddba88698a",
+    "name": "Acid",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/e182c3e9-1767-4dad-b100-81ddba88698a.png",
+    "created_at": "2025-12-07T14:53:10.211665+00:00"
+  },
+  {
+    "guid": "9de0d93e-cbe8-434f-a4e7-4db8ee7b18cf",
+    "name": "Multishot",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/9de0d93e-cbe8-434f-a4e7-4db8ee7b18cf.png",
+    "created_at": "2025-12-07T14:55:43.693822+00:00"
+  },
+  {
+    "guid": "4a58d117-5baa-4f23-affb-0b064c5c84b2",
+    "name": "Robot",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/4a58d117-5baa-4f23-affb-0b064c5c84b2.png",
+    "created_at": "2025-12-07T14:55:58.478869+00:00"
+  },
+  {
+    "guid": "bf76ba0b-0958-4f70-a741-7c72b662e448",
+    "name": "MiniBombs",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/bf76ba0b-0958-4f70-a741-7c72b662e448.png",
+    "created_at": "2025-12-07T14:56:14.158469+00:00"
+  },
+  {
+    "guid": "56c9da6c-8b59-4c84-9a33-213de8f5debe",
+    "name": "Poseidon",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/56c9da6c-8b59-4c84-9a33-213de8f5debe.png",
+    "created_at": "2025-12-07T14:56:25.085679+00:00"
+  },
+  {
+    "guid": "27313559-1fda-4859-8bb5-d5267827dfc7",
+    "name": "Cursed",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/27313559-1fda-4859-8bb5-d5267827dfc7.png",
+    "created_at": "2025-12-07T14:56:36.508756+00:00"
+  },
+  {
+    "guid": "6b8f75a3-90dd-42eb-a72d-e2829b480f35",
+    "name": "Blocker",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/6b8f75a3-90dd-42eb-a72d-e2829b480f35.png",
+    "created_at": "2025-12-07T14:56:45.477946+00:00"
+  },
+  {
+    "guid": "6a89bb6b-433a-4872-9abb-2a05fd106b73",
+    "name": "Hive",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/6a89bb6b-433a-4872-9abb-2a05fd106b73.png",
+    "created_at": "2025-12-07T14:56:58.144078+00:00"
+  },
+  {
+    "guid": "ffc78bac-8ac9-40d3-ae64-239a2f2830fe",
+    "name": "Hat Soldier Epic",
+    "category": "offers",
+    "subcategory": "Skull Soldier",
+    "type": "hat",
+    "icon_path": "assets/icons/offers/ffc78bac-8ac9-40d3-ae64-239a2f2830fe.png",
+    "created_at": "2025-12-07T15:09:13.236385+00:00"
+  },
+  {
+    "guid": "fc111ccd-674f-4c06-8d2a-e1bbcebf601b",
+    "name": "Hat Drunk Legendary",
+    "category": "offers",
+    "subcategory": "Drink Arsenal",
+    "type": "hat",
+    "icon_path": "assets/icons/offers/Drink Arsenal/fc111ccd-674f-4c06-8d2a-e1bbcebf601b.png",
+    "created_at": "2025-12-07T15:10:25.879831+00:00"
+  },
+  {
+    "guid": "ca2cea0a-f81b-4015-9a24-a1507865e10a",
+    "name": "Hat Sensei Legendary",
+    "category": "offers",
+    "subcategory": "Sensei",
+    "type": "hat",
+    "icon_path": "assets/icons/offers/Sensei/ca2cea0a-f81b-4015-9a24-a1507865e10a.png",
+    "created_at": "2025-12-07T15:10:55.882040+00:00"
+  },
+  {
+    "guid": "0e950cff-2fa0-4071-adc1-0183934d971c",
+    "name": "Bow Soldier Legendary",
+    "category": "offers",
+    "subcategory": "Skull Soldier",
+    "type": "bow",
+    "icon_path": "assets/icons/offers/Skull Soldier/0e950cff-2fa0-4071-adc1-0183934d971c.png",
+    "created_at": "2025-12-07T15:12:04.479880+00:00"
+  },
+  {
+    "guid": "4a2c013a-8c58-4543-a86e-cfb0d59675ba",
+    "name": "Bow Drunk Legendary",
+    "category": "offers",
+    "subcategory": "Drink Arsenal",
+    "type": "bow",
+    "icon_path": "assets/icons/offers/Drink Arsenal/4a2c013a-8c58-4543-a86e-cfb0d59675ba.png",
+    "created_at": "2025-12-07T15:12:22.901132+00:00"
+  },
+  {
+    "guid": "5e061cd4-7447-4fc3-acb0-6c74020d5852",
+    "name": "Sticker Drunk 1",
+    "category": "offers",
+    "subcategory": "Drink Arsenal",
+    "type": "stickers",
+    "icon_path": "assets/icons/offers/Drink Arsenal/5e061cd4-7447-4fc3-acb0-6c74020d5852.png",
+    "created_at": "2025-12-07T15:12:51.143539+00:00"
+  },
+  {
+    "guid": "54622665-b1de-421d-a653-fc03f01701ea",
+    "name": "Sticker Drunk 2",
+    "category": "offers",
+    "subcategory": "Drink Arsenal",
+    "type": "stickers",
+    "icon_path": "assets/icons/offers/Drink Arsenal/54622665-b1de-421d-a653-fc03f01701ea.png",
+    "created_at": "2025-12-07T15:13:02.617262+00:00"
+  },
+  {
+    "guid": "73d08ff5-a5f1-4f4e-b051-6eb53522d1ea",
+    "name": "Sticker Drunk 3",
+    "category": "offers",
+    "subcategory": "Drink Arsenal",
+    "type": "stickers",
+    "icon_path": "assets/icons/offers/Drink Arsenal/73d08ff5-a5f1-4f4e-b051-6eb53522d1ea.png",
+    "created_at": "2025-12-07T15:13:12.745150+00:00"
+  },
+  {
+    "guid": "95c221b7-f221-42a8-9b28-e8e669d5efb4",
+    "name": "Sticker Skull Soldier 1",
+    "category": "offers",
+    "subcategory": "Skull Soldier",
+    "type": "stickers",
+    "icon_path": "assets/icons/offers/Skull Soldier/95c221b7-f221-42a8-9b28-e8e669d5efb4.png",
+    "created_at": "2025-12-07T15:13:29.882621+00:00"
+  },
+  {
+    "guid": "698cfa99-d325-4027-b9b4-0bbe9edec7f2",
+    "name": "Sticker Skull Soldier 2",
+    "category": "offers",
+    "subcategory": "Skull Soldier",
+    "type": "stickers",
+    "icon_path": "assets/icons/offers/Skull Soldier/698cfa99-d325-4027-b9b4-0bbe9edec7f2.png",
+    "created_at": "2025-12-07T15:13:40.530645+00:00"
+  },
+  {
+    "guid": "17245917-21b3-4f49-9da4-ed6f6d19a8be",
+    "name": "Sticker Sensei 1",
+    "category": "offers",
+    "subcategory": "Sensei",
+    "type": "stickers",
+    "icon_path": "assets/icons/offers/Sensei/17245917-21b3-4f49-9da4-ed6f6d19a8be.png",
+    "created_at": "2025-12-07T15:14:10.932318+00:00"
+  },
+  {
+    "guid": "df6e8c50-9d08-459d-a791-2cb751bd05f3",
+    "name": "Sticker Sensei 2",
+    "category": "offers",
+    "subcategory": "Sensei",
+    "type": "stickers",
+    "icon_path": "assets/icons/offers/Sensei/df6e8c50-9d08-459d-a791-2cb751bd05f3.png",
+    "created_at": "2025-12-07T15:14:20.718378+00:00"
+  },
+  {
+    "guid": "3a7c54e6-3d5c-4ce2-88b1-13ae398c8bc4",
+    "name": "Glasses Sensei Epic",
+    "category": "offers",
+    "subcategory": "Sensei",
+    "type": "glasses",
+    "icon_path": "assets/icons/offers/Sensei/3a7c54e6-3d5c-4ce2-88b1-13ae398c8bc4.png",
+    "created_at": "2025-12-07T15:14:48.577454+00:00"
+  },
+  {
+    "guid": "b6440af8-1b34-4600-946b-02482505b80d",
+    "name": "Beard Sensei Epic",
+    "category": "offers",
+    "subcategory": "Sensei",
+    "type": "beard",
+    "icon_path": "assets/icons/offers/Sensei/b6440af8-1b34-4600-946b-02482505b80d.png",
+    "created_at": "2025-12-07T15:15:12.718494+00:00"
+  },
+  {
+    "guid": "5e2d51ce-76ca-45db-aaec-5d765a8f234a",
+    "name": "Glasses Soldier Epic",
+    "category": "offers",
+    "subcategory": "Skull Soldier",
+    "type": "glasses",
+    "icon_path": "assets/icons/offers/Skull Soldier/5e2d51ce-76ca-45db-aaec-5d765a8f234a.png",
+    "created_at": "2025-12-07T15:16:06.559773+00:00"
+  },
+  {
+    "guid": "68393009-f34e-4db6-8618-26770f26b07f",
+    "name": "Sticker Web 3",
+    "category": "events",
+    "subcategory": "Spider Hunt",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Spider Hunt/68393009-f34e-4db6-8618-26770f26b07f.png",
+    "created_at": "2025-12-29T12:40:47.192655+00:00"
+  },
+  {
+    "guid": "4f64d1d4-c54c-4db2-bca0-839cc95b5606",
+    "name": "Sticker Web 4",
+    "category": "events",
+    "subcategory": "Spider Hunt",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Spider Hunt/4f64d1d4-c54c-4db2-bca0-839cc95b5606.png",
+    "created_at": "2025-12-29T12:41:03.913608+00:00"
+  },
+  {
+    "guid": "53ee0dd6-4eae-45bf-a17f-2cc1d02edc15",
+    "name": "Sticker Web 5",
+    "category": "events",
+    "subcategory": "Spider Hunt",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Spider Hunt/53ee0dd6-4eae-45bf-a17f-2cc1d02edc15.png",
+    "created_at": "2025-12-29T12:41:18.036643+00:00"
+  },
+  {
+    "guid": "87bcb788-21cf-4c5e-8e73-3999a99dfc4e",
+    "name": "Sticker Web 6",
+    "category": "events",
+    "subcategory": "Spider Hunt",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Spider Hunt/87bcb788-21cf-4c5e-8e73-3999a99dfc4e.png",
+    "created_at": "2025-12-29T12:41:35.943818+00:00"
+  },
+  {
+    "guid": "27fda85b-2353-4e50-89b2-08a9379930ca",
+    "name": "Sticker Web 7",
+    "category": "events",
+    "subcategory": "Spider Hunt",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Spider Hunt/27fda85b-2353-4e50-89b2-08a9379930ca.png",
+    "created_at": "2025-12-29T12:41:53.086281+00:00"
+  },
+  {
+    "guid": "5794c84d-475b-4677-9ccb-140373718c22",
+    "name": "Sticker Jungle Wildman No 1",
+    "category": "events",
+    "subcategory": "Jungle Hunt",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Jungle Hunt/5794c84d-475b-4677-9ccb-140373718c22.png",
+    "created_at": "2025-12-29T12:42:32.641974+00:00"
+  },
+  {
+    "guid": "a4f319bd-1135-434e-8efe-d85ff9b6cfbd",
+    "name": "Sticker Jungle Wildman No 2",
+    "category": "events",
+    "subcategory": "Jungle Hunt",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Jungle Hunt/a4f319bd-1135-434e-8efe-d85ff9b6cfbd.png",
+    "created_at": "2025-12-29T12:42:46.633250+00:00"
+  },
+  {
+    "guid": "acaeb32e-eae8-4ff9-8bc8-0a61261e9a99",
+    "name": "Sticker Jungle Wildman No 3",
+    "category": "events",
+    "subcategory": "Jungle Hunt",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Jungle Hunt/acaeb32e-eae8-4ff9-8bc8-0a61261e9a99.png",
+    "created_at": "2025-12-29T12:42:58.492947+00:00"
+  },
+  {
+    "guid": "4bcaf29f-6627-4163-997f-7c31d4de6630",
+    "name": "Sticker Jungle Wildman No 4",
+    "category": "events",
+    "subcategory": "Jungle Hunt",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Jungle Hunt/4bcaf29f-6627-4163-997f-7c31d4de6630.png",
+    "created_at": "2025-12-29T12:43:08.662450+00:00"
+  },
+  {
+    "guid": "1838741d-07ce-4c10-8b58-93ee1ee81b24",
+    "name": "Sticker Jungle Wildman No 5",
+    "category": "events",
+    "subcategory": "Jungle Hunt",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Jungle Hunt/1838741d-07ce-4c10-8b58-93ee1ee81b24.png",
+    "created_at": "2025-12-29T12:43:21.649892+00:00"
+  },
+  {
+    "guid": "54f7ea46-6702-4786-ba81-bd155206a79c",
+    "name": "Body Jungle Wildman Legendary",
+    "category": "events",
+    "subcategory": "Jungle Hunt",
+    "type": "body",
+    "icon_path": "assets/icons/events/Jungle Hunt/54f7ea46-6702-4786-ba81-bd155206a79c.png",
+    "created_at": "2025-12-29T12:43:50.501728+00:00"
+  },
+  {
+    "guid": "f94f10b5-5052-427d-86b8-c6c459833744",
+    "name": "Bow Jungle Wildman Legendary",
+    "category": "events",
+    "subcategory": "Jungle Hunt",
+    "type": "bow",
+    "icon_path": "assets/icons/events/Jungle Hunt/f94f10b5-5052-427d-86b8-c6c459833744.png",
+    "created_at": "2025-12-29T12:44:12.904721+00:00"
+  },
+  {
+    "guid": "08dab424-428f-4187-98c1-03319920b42f",
+    "name": "Hat Jungle Wildman Epic",
+    "category": "events",
+    "subcategory": "Jungle Hunt",
+    "type": "hat",
+    "icon_path": "assets/icons/events/Jungle Hunt/08dab424-428f-4187-98c1-03319920b42f.png",
+    "created_at": "2025-12-29T12:44:47.419955+00:00"
+  },
+  {
+    "guid": "cd2bb1f5-4508-43b5-80a2-3a4e6b2b229e",
+    "name": "Beard Jungle Wildman Rare",
+    "category": "events",
+    "subcategory": "Jungle Hunt",
+    "type": "beard",
+    "icon_path": "assets/icons/events/Jungle Hunt/cd2bb1f5-4508-43b5-80a2-3a4e6b2b229e.png",
+    "created_at": "2025-12-29T12:45:15.439639+00:00"
+  },
+  {
+    "guid": "5f5cb119-9242-47b4-aece-32b1dc600e78",
+    "name": "Glasses Jungle Wildman Rare",
+    "category": "events",
+    "subcategory": "Jungle Hunt",
+    "type": "glasses",
+    "icon_path": "assets/icons/events/Jungle Hunt/5f5cb119-9242-47b4-aece-32b1dc600e78.png",
+    "created_at": "2025-12-29T12:45:46.693009+00:00"
+  },
+  {
+    "guid": "db719d6b-68ae-478a-bb22-46ac4ee1fb6e",
+    "name": "Bow Season 27 Legendary",
+    "category": "battle_pass",
+    "subcategory": "Season 27",
+    "type": "bow",
+    "icon_path": "assets/icons/battle_pass/Season 27/db719d6b-68ae-478a-bb22-46ac4ee1fb6e.png",
+    "created_at": "2026-02-09T21:29:26.350781+00:00"
+  },
+  {
+    "guid": "2ce4ef9a-5064-4ebb-8ea4-e2b39c6e5c3a",
+    "name": "Sticker Season 27 No 1",
+    "category": "battle_pass",
+    "subcategory": "Season 27",
+    "type": "stickers",
+    "icon_path": "assets/icons/battle_pass/Season 27/2ce4ef9a-5064-4ebb-8ea4-e2b39c6e5c3a.png",
+    "created_at": "2026-02-09T21:30:10.419169+00:00"
+  },
+  {
+    "guid": "28a7f6c5-be2f-422b-9bef-c42c3226f80c",
+    "name": "Sticker Season 27 No 2",
+    "category": "battle_pass",
+    "subcategory": "Season 27",
+    "type": "stickers",
+    "icon_path": "assets/icons/battle_pass/Season 27/28a7f6c5-be2f-422b-9bef-c42c3226f80c.png",
+    "created_at": "2026-02-09T21:30:31.700093+00:00"
+  },
+  {
+    "guid": "a1731695-cace-4a0b-ae47-9955003bf39f",
+    "name": "Sticker Season 27 No 3",
+    "category": "battle_pass",
+    "subcategory": "Season 27",
+    "type": "stickers",
+    "icon_path": "assets/icons/battle_pass/Season 27/a1731695-cace-4a0b-ae47-9955003bf39f.png",
+    "created_at": "2026-02-09T21:30:50.766337+00:00"
+  },
+  {
+    "guid": "eca4cae4-9c14-40a4-a87f-f436a0f19e6f",
+    "name": "Sticker Season 27 No 4",
+    "category": "battle_pass",
+    "subcategory": "Season 27",
+    "type": "stickers",
+    "icon_path": "assets/icons/battle_pass/Season 27/eca4cae4-9c14-40a4-a87f-f436a0f19e6f.png",
+    "created_at": "2026-02-09T21:31:07.379332+00:00"
+  },
+  {
+    "guid": "47a60a09-3cae-4daa-a893-14bde7f96fb7",
+    "name": "Sticker Season 27 No 5",
+    "category": "battle_pass",
+    "subcategory": "Season 27",
+    "type": "stickers",
+    "icon_path": "assets/icons/battle_pass/Season 27/47a60a09-3cae-4daa-a893-14bde7f96fb7.png",
+    "created_at": "2026-02-09T21:31:21.892202+00:00"
+  },
+  {
+    "guid": "19721ecc-6b2f-4367-b5f4-683ea0709bdb",
+    "name": "Vortex",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/19721ecc-6b2f-4367-b5f4-683ea0709bdb.png",
+    "created_at": "2026-02-09T21:32:02.897034+00:00"
+  },
+  {
+    "guid": "bf7496cd-ea06-4d20-bf1b-7a38155c00f2",
+    "name": "Hat Cylinder Green",
+    "category": "battle_pass",
+    "subcategory": "Season 15",
+    "type": "hat",
+    "icon_path": "assets/icons/battle_pass/Season 15/bf7496cd-ea06-4d20-bf1b-7a38155c00f2.png",
+    "created_at": "2026-03-04T14:01:23.740247+00:00"
+  },
+  {
+    "guid": "d6f13fed-7e8c-40a2-adf4-b42b943bbe4c",
+    "name": "Bow Season 29 Legendary",
+    "category": "battle_pass",
+    "subcategory": "Season 29",
+    "type": "bow",
+    "icon_path": "assets/icons/battle_pass/Season 29/d6f13fed-7e8c-40a2-adf4-b42b943bbe4c.png",
+    "created_at": "2026-03-20T08:27:47.665046+00:00"
+  },
+  {
+    "guid": "42fb047d-d6f9-426a-81a9-94ca51eacdcd",
+    "name": "Phrase Famous 34",
+    "category": "battle_pass",
+    "subcategory": "Season 29",
+    "type": "phrases",
+    "icon_path": "assets/icons/battle_pass/Season 29/42fb047d-d6f9-426a-81a9-94ca51eacdcd.png",
+    "created_at": "2026-03-20T08:29:03.429666+00:00"
+  },
+  {
+    "guid": "7806b96a-8ad6-4341-b3f0-60f695fa6bfc",
+    "name": "Phrase Awesomeness 19",
+    "category": "battle_pass",
+    "subcategory": "Season 29",
+    "type": "phrases",
+    "icon_path": "assets/icons/battle_pass/Season 29/7806b96a-8ad6-4341-b3f0-60f695fa6bfc.png",
+    "created_at": "2026-03-20T08:29:22.055901+00:00"
+  },
+  {
+    "guid": "12d86b3e-d25b-4cd1-b7df-35d69f8cd369",
+    "name": "Phrase Insolence 18",
+    "category": "battle_pass",
+    "subcategory": "Season 29",
+    "type": "phrases",
+    "icon_path": "assets/icons/battle_pass/Season 29/12d86b3e-d25b-4cd1-b7df-35d69f8cd369.png",
+    "created_at": "2026-03-20T08:29:37.515018+00:00"
+  },
+  {
+    "guid": "fb5d7545-14f9-4b54-91f2-c4030471cee6",
+    "name": "Phrase Approval 16",
+    "category": "battle_pass",
+    "subcategory": "Season 29",
+    "type": "phrases",
+    "icon_path": "assets/icons/battle_pass/Season 29/fb5d7545-14f9-4b54-91f2-c4030471cee6.png",
+    "created_at": "2026-03-20T08:29:51.859670+00:00"
+  },
+  {
+    "guid": "31feed8b-1f9e-4c7d-9ad9-b25c4703d570",
+    "name": "Phrase Disapproval 13",
+    "category": "battle_pass",
+    "subcategory": "Season 29",
+    "type": "phrases",
+    "icon_path": "assets/icons/battle_pass/Season 29/31feed8b-1f9e-4c7d-9ad9-b25c4703d570.png",
+    "created_at": "2026-03-20T08:30:09.413678+00:00"
+  },
+  {
+    "guid": "96d1dd14-f4b7-4513-b650-6fb3d2b749fa",
+    "name": "Sticker Season 29 No 1",
+    "category": "battle_pass",
+    "subcategory": "Season 29",
+    "type": "stickers",
+    "icon_path": "assets/icons/battle_pass/Season 29/96d1dd14-f4b7-4513-b650-6fb3d2b749fa.png",
+    "created_at": "2026-03-20T08:30:44.951998+00:00"
+  },
+  {
+    "guid": "5519ab33-72c7-43b0-8039-16708df1694a",
+    "name": "Sticker Season 29 No 2",
+    "category": "battle_pass",
+    "subcategory": "Season 29",
+    "type": "stickers",
+    "icon_path": "assets/icons/battle_pass/Season 29/5519ab33-72c7-43b0-8039-16708df1694a.png",
+    "created_at": "2026-03-20T08:30:58.557519+00:00"
+  },
+  {
+    "guid": "75549650-1b12-49c7-8aad-ea3b1ba1d259",
+    "name": "Sticker Season 29 No 3",
+    "category": "battle_pass",
+    "subcategory": "Season 29",
+    "type": "stickers",
+    "icon_path": "assets/icons/battle_pass/Season 29/75549650-1b12-49c7-8aad-ea3b1ba1d259.png",
+    "created_at": "2026-03-20T08:31:10.423932+00:00"
+  },
+  {
+    "guid": "1529d307-8ab2-4075-9189-a693516fef9c",
+    "name": "Sticker Season 29 No 4",
+    "category": "battle_pass",
+    "subcategory": "Season 29",
+    "type": "stickers",
+    "icon_path": "assets/icons/battle_pass/Season 29/1529d307-8ab2-4075-9189-a693516fef9c.png",
+    "created_at": "2026-03-20T08:31:22.017533+00:00"
+  },
+  {
+    "guid": "756432e9-70d1-4992-8d8d-b35c0b0bf893",
+    "name": "Sticker Season 29 No 5",
+    "category": "battle_pass",
+    "subcategory": "Season 29",
+    "type": "stickers",
+    "icon_path": "assets/icons/battle_pass/Season 29/756432e9-70d1-4992-8d8d-b35c0b0bf893.png",
+    "created_at": "2026-03-20T08:31:34.681228+00:00"
+  },
+  {
+    "guid": "b15b1e60-44f6-4df8-bdb2-bab576b4aac7",
+    "name": "Poison",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/b15b1e60-44f6-4df8-bdb2-bab576b4aac7.png",
+    "created_at": "2026-03-20T08:32:08.038100+00:00"
+  },
+  {
+    "guid": "c3f2807a-7292-4f37-9edd-bc0224a6bed6",
+    "name": "Sticker Season 31 No 1",
+    "category": "battle_pass",
+    "subcategory": "Season 31",
+    "type": "stickers",
+    "icon_path": "assets/icons/battle_pass/Season 31/c3f2807a-7292-4f37-9edd-bc0224a6bed6.png",
+    "created_at": "2026-05-27T11:34:07.497848+00:00"
+  },
+  {
+    "guid": "47a8dc34-c916-430f-8382-9480c332635e",
+    "name": "Sticker Season 31 No 2",
+    "category": "battle_pass",
+    "subcategory": "Season 31",
+    "type": "stickers",
+    "icon_path": "assets/icons/battle_pass/Season 31/47a8dc34-c916-430f-8382-9480c332635e.png",
+    "created_at": "2026-05-27T11:34:32.503745+00:00"
+  },
+  {
+    "guid": "10c640a0-3fa5-4452-8bb8-712d91e1cca5",
+    "name": "Sticker Season 31 No 3",
+    "category": "battle_pass",
+    "subcategory": "Season 31",
+    "type": "stickers",
+    "icon_path": "assets/icons/battle_pass/Season 31/10c640a0-3fa5-4452-8bb8-712d91e1cca5.png",
+    "created_at": "2026-05-27T11:34:50.998126+00:00"
+  },
+  {
+    "guid": "f2c59ac0-ec59-4438-811d-f3ae4aadb82a",
+    "name": "Sticker Season 31 No 4",
+    "category": "battle_pass",
+    "subcategory": "Season 31",
+    "type": "stickers",
+    "icon_path": "assets/icons/battle_pass/Season 31/f2c59ac0-ec59-4438-811d-f3ae4aadb82a.png",
+    "created_at": "2026-05-27T11:35:13.715319+00:00"
+  },
+  {
+    "guid": "91310ead-c824-4c02-b485-46e9fb44a145",
+    "name": "Sticker Season 31 No 5",
+    "category": "battle_pass",
+    "subcategory": "Season 31",
+    "type": "stickers",
+    "icon_path": "assets/icons/battle_pass/Season 31/91310ead-c824-4c02-b485-46e9fb44a145.png",
+    "created_at": "2026-05-27T11:35:39.723250+00:00"
+  },
+  {
+    "guid": "213d673a-25dc-468c-b149-a716ce24f63a",
+    "name": "Phrase Insolence 19",
+    "category": "battle_pass",
+    "subcategory": "Season 31",
+    "type": "phrases",
+    "icon_path": "assets/icons/battle_pass/Season 31/213d673a-25dc-468c-b149-a716ce24f63a.png",
+    "created_at": "2026-05-27T11:37:01.745521+00:00"
+  },
+  {
+    "guid": "434d7ea0-08f8-459c-b712-a6f695eff73e",
+    "name": "Phrase Insolence 20",
+    "category": "battle_pass",
+    "subcategory": "Season 31",
+    "type": "phrases",
+    "icon_path": "assets/icons/battle_pass/Season 31/434d7ea0-08f8-459c-b712-a6f695eff73e.png",
+    "created_at": "2026-05-27T11:37:22.640825+00:00"
+  },
+  {
+    "guid": "fb8641a5-1c38-479c-82f7-ba9743f5d983",
+    "name": "Phrase Disapproval 14",
+    "category": "battle_pass",
+    "subcategory": "Season 31",
+    "type": "phrases",
+    "icon_path": "assets/icons/battle_pass/Season 31/fb8641a5-1c38-479c-82f7-ba9743f5d983.png",
+    "created_at": "2026-05-27T11:37:37.009882+00:00"
+  },
+  {
+    "guid": "d127574a-a0cc-416c-93d3-cdc8bce0af60",
+    "name": "Phrase Impatience 9",
+    "category": "battle_pass",
+    "subcategory": "Season 31",
+    "type": "phrases",
+    "icon_path": "assets/icons/battle_pass/Season 31/d127574a-a0cc-416c-93d3-cdc8bce0af60.png",
+    "created_at": "2026-05-27T11:37:49.806550+00:00"
+  },
+  {
+    "guid": "984a831d-ce96-41bf-89f7-93cc2a3185a9",
+    "name": "Phrase Appeals 19",
+    "category": "battle_pass",
+    "subcategory": "Season 31",
+    "type": "phrases",
+    "icon_path": "assets/icons/battle_pass/Season 31/984a831d-ce96-41bf-89f7-93cc2a3185a9.png",
+    "created_at": "2026-05-27T11:38:05.793027+00:00"
+  },
+  {
+    "guid": "1c1dfab4-b1e1-4a68-bc8c-a0390b511a33",
+    "name": "Sticker Season 33 No 1",
+    "category": "battle_pass",
+    "subcategory": "Season 33",
+    "type": "stickers",
+    "icon_path": "assets/icons/battle_pass/Season 33/1c1dfab4-b1e1-4a68-bc8c-a0390b511a33.png",
+    "created_at": "2026-08-05T15:36:10.904435+00:00"
+  },
+  {
+    "guid": "b8b3e45b-efe3-483a-b562-c40426f996eb",
+    "name": "Sticker Season 33 No 2",
+    "category": "battle_pass",
+    "subcategory": "Season 33",
+    "type": "stickers",
+    "icon_path": "assets/icons/battle_pass/Season 33/b8b3e45b-efe3-483a-b562-c40426f996eb.png",
+    "created_at": "2026-08-05T15:36:30.177534+00:00"
+  },
+  {
+    "guid": "a81e3a13-cf7c-4422-bfdd-cf82f0de79a1",
+    "name": "Sticker Season 33 No 3",
+    "category": "battle_pass",
+    "subcategory": "Season 33",
+    "type": "stickers",
+    "icon_path": "assets/icons/battle_pass/Season 33/a81e3a13-cf7c-4422-bfdd-cf82f0de79a1.png",
+    "created_at": "2026-08-05T15:36:50.603602+00:00"
+  },
+  {
+    "guid": "2e491a37-6b29-4534-b685-cbf422111447",
+    "name": "Sticker Season 33 No 4",
+    "category": "battle_pass",
+    "subcategory": "Season 33",
+    "type": "stickers",
+    "icon_path": "assets/icons/battle_pass/Season 33/2e491a37-6b29-4534-b685-cbf422111447.png",
+    "created_at": "2026-08-05T15:37:06.938880+00:00"
+  },
+  {
+    "guid": "ee9a6eb4-9ee5-4253-bcd6-dc1ae385d5f0",
+    "name": "Sticker Season 33 No 5",
+    "category": "battle_pass",
+    "subcategory": "Season 33",
+    "type": "stickers",
+    "icon_path": "assets/icons/battle_pass/Season 33/ee9a6eb4-9ee5-4253-bcd6-dc1ae385d5f0.png",
+    "created_at": "2026-08-05T15:37:20.956706+00:00"
+  },
+  {
+    "guid": "2d47ad3c-45a5-421c-b444-5c6f6f5958f2",
+    "name": "Phrase Famous 35",
+    "category": "battle_pass",
+    "subcategory": "Season 33",
+    "type": "phrases",
+    "icon_path": "assets/icons/battle_pass/Season 33/2d47ad3c-45a5-421c-b444-5c6f6f5958f2.png",
+    "created_at": "2026-08-05T15:37:58.227246+00:00"
+  },
+  {
+    "guid": "220b1ba5-83ba-4bb9-b200-18628358db03",
+    "name": "Phrase Insolence 21",
+    "category": "battle_pass",
+    "subcategory": "Season 33",
+    "type": "phrases",
+    "icon_path": "assets/icons/battle_pass/Season 33/220b1ba5-83ba-4bb9-b200-18628358db03.png",
+    "created_at": "2026-08-05T15:38:25.556402+00:00"
+  },
+  {
+    "guid": "f8eda762-f6e9-4e30-be08-1280c3505611",
+    "name": "Phrase Insolence 22",
+    "category": "battle_pass",
+    "subcategory": "Season 33",
+    "type": "phrases",
+    "icon_path": "assets/icons/battle_pass/Season 33/f8eda762-f6e9-4e30-be08-1280c3505611.png",
+    "created_at": "2026-08-05T15:38:42.132465+00:00"
+  },
+  {
+    "guid": "9a5ae601-b50b-4f64-aa50-f2710d90f103",
+    "name": "Phrase Insolence 23",
+    "category": "battle_pass",
+    "subcategory": "Season 33",
+    "type": "phrases",
+    "icon_path": "assets/icons/battle_pass/Season 33/9a5ae601-b50b-4f64-aa50-f2710d90f103.png",
+    "created_at": "2026-08-05T15:38:56.055408+00:00"
+  },
+  {
+    "guid": "8673ee96-389f-427f-b6e7-66e5cf8db785",
+    "name": "Phrase Insolence 24",
+    "category": "battle_pass",
+    "subcategory": "Season 33",
+    "type": "phrases",
+    "icon_path": "assets/icons/battle_pass/Season 33/8673ee96-389f-427f-b6e7-66e5cf8db785.png",
+    "created_at": "2026-08-05T15:39:12.328196+00:00"
+  },
+  {
+    "guid": "a7c3e1f2-4b5d-6e8f-9012-3456789abcde",
+    "name": "Elemental2",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/a7c3e1f2-4b5d-6e8f-9012-3456789abcde.png",
+    "created_at": "2026-08-05T15:41:36.462588+00:00"
+  },
+  {
+    "guid": "b0e6b87c-973c-405c-812b-dbe8df85645d",
+    "name": "Elemental",
+    "category": "arrows",
+    "subcategory": null,
+    "type": "arrows",
+    "icon_path": "assets/icons/arrows/b0e6b87c-973c-405c-812b-dbe8df85645d.png",
+    "created_at": "2026-08-05T15:41:59.452936+00:00"
+  },
+  {
+    "name": "Swamp",
+    "guid": "67b36985-ce51-46dc-96ff-ced939d60e50",
+    "category": "maps",
+    "subcategory": null,
+    "type": "maps",
+    "icon_path": "assets/icons/maps/67b36985-ce51-46dc-96ff-ced939d60e50.png",
+    "created_at": "2026-10-25T18:26:07.838899+00:00"
+  },
+  {
+    "name": "Vulcan",
+    "guid": "2355c80b-7cc0-4b67-b748-6dc07698effc",
+    "category": "maps",
+    "subcategory": null,
+    "type": "maps",
+    "icon_path": "assets/icons/maps/2355c80b-7cc0-4b67-b748-6dc07698effc.png",
+    "created_at": "2026-10-25T18:32:45.174287+00:00"
+  },
+  {
+    "name": "Castle",
+    "guid": "6030d78a-6dcf-4d56-bbaa-cb486a03f509",
+    "category": "maps",
+    "subcategory": null,
+    "type": "maps",
+    "icon_path": "assets/icons/maps/6030d78a-6dcf-4d56-bbaa-cb486a03f509.png",
+    "created_at": "2026-10-25T18:33:09.531621+00:00"
+  },
+  {
+    "name": "Ice",
+    "guid": "58dfaa6a-7b76-4459-b60b-9ea42bb90801",
+    "category": "maps",
+    "subcategory": null,
+    "type": "maps",
+    "icon_path": "assets/icons/maps/58dfaa6a-7b76-4459-b60b-9ea42bb90801.png",
+    "created_at": "2026-10-25T18:33:18.642518+00:00"
+  },
+  {
+    "name": "Jungle",
+    "guid": "671102b8-e096-41d6-a79c-b2231f34a339",
+    "category": "maps",
+    "subcategory": null,
+    "type": "maps",
+    "icon_path": "assets/icons/maps/671102b8-e096-41d6-a79c-b2231f34a339.png",
+    "created_at": "2026-10-25T18:33:32.869730+00:00"
+  },
+  {
+    "name": "Mushrooms",
+    "guid": "28d75f20-6f98-4108-ac19-0021f244d1b9",
+    "category": "maps",
+    "subcategory": null,
+    "type": "maps",
+    "icon_path": "assets/icons/maps/28d75f20-6f98-4108-ac19-0021f244d1b9.png",
+    "created_at": "2026-10-25T18:34:00.530836+00:00"
   }
 ]

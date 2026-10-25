@@ -1,455 +1,269 @@
-﻿# app/add_item.py
-import os
-import sys
-import json
-import uuid
-import shutil
-from datetime import datetime, timezone
 from pathlib import Path
+from PySide6.QtCore import Qt, Signal, QThread, Slot
+from PySide6.QtGui import QPixmap
+from PySide6.QtWidgets import (QWidget, QLabel, QVBoxLayout, QHBoxLayout, QLineEdit,
+    QPushButton, QFileDialog, QComboBox, QFrame, QStackedWidget, QScrollArea, QProgressBar, QMessageBox)
 
-from PySide6.QtCore import Qt, QMimeData
-from PySide6.QtGui import QPixmap, QDragEnterEvent, QDropEvent
-from PySide6.QtWidgets import (
-    QApplication, QWidget, QLabel, QVBoxLayout, QHBoxLayout, QLineEdit,
-    QPushButton, QFileDialog, QComboBox, QMessageBox, QFrame
-)
 
-# ---------- КОНФИГУРАЦИЯ ----------
-DEFAULT_CATEGORIES = ["arrows", "offers", "battle_pass", "events", "maps"]
-DEFAULT_TYPES = ["arrows","bow", "hat", "body", "beard", "emojis", "glasses", "phrases", "stickers"]
+class CatalogWriteTask(QThread):
+    """Only filesystem work runs here; widgets stay on the GUI thread."""
 
-def get_project_root() -> Path:
-    # Ищем корень проекта (директорию, содержащую папку app)
-    env = os.getenv("GUIDS_APP_ROOT")
-    if env:
-        p = Path(env).resolve()
-        if (p / "app").is_dir():
-            return p
-    here = Path(__file__).resolve()
-    for p in [here.parent] + list(here.parents):
-        if (p / "app").is_dir():
-            return p
-    # если упаковано в PyInstaller
-    if getattr(sys, "frozen", False):
-        exe_dir = Path(sys.executable).resolve().parent
-        if (exe_dir / "app").is_dir():
-            return exe_dir
-    return Path.cwd().resolve()
+    def __init__(self, catalog, record, main_icon, sub_icon, original, parent, operation="save"):
+        super().__init__(parent)
+        self.catalog = catalog
+        self.record = record
+        self.main_icon = main_icon
+        self.sub_icon = sub_icon
+        self.original = dict(original) if original else None
+        self.result = None
+        self.error = None
+        self.operation = operation
 
-PROJECT_ROOT = get_project_root()
-DATA_DIR = PROJECT_ROOT / "data"
-ASSETS_DIR = PROJECT_ROOT / "assets" / "icons"
-ALL_INDEX = DATA_DIR / "_all.json"
+    def run(self):
+        try:
+            if self.operation == "delete":
+                self.result = self.catalog.delete_item(self.record["guid"])
+            else:
+                self.result = self.catalog.save_item(self.record, self.main_icon, self.sub_icon, self.original)
+        except Exception as error:
+            self.error = str(error)
 
-# ---------- УТИЛИТЫ ----------
-def ensure_dirs():
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
-    ASSETS_DIR.mkdir(parents=True, exist_ok=True)
-    if not ALL_INDEX.exists():
-        ALL_INDEX.write_text("[]", encoding="utf-8")
 
-def load_json(path: Path):
-    if not path.exists():
-        return []
-    try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except Exception:
-        return []
-
-def save_json(path: Path, data):
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-
-def list_categories():
-    # Собираем категории из файлов в data + дефолтные
-    existing = set(DEFAULT_CATEGORIES)
-    if DATA_DIR.exists():
-        for p in DATA_DIR.glob("*.json"):
-            if p.name == "_all.json":
-                continue
-            existing.add(p.stem)
-    return sorted(existing)
-
-def list_subcategories(category: str):
-    if not category:
-        return []
-    cat_file = DATA_DIR / f"{category}.json"
-    if not cat_file.exists():
-        return []
-    data = load_json(cat_file)
-    subs = set()
-    for rec in data:
-        s = rec.get("subcategory")
-        if s:
-            subs.add(s)
-    return sorted(subs)
-
-def is_guid_unique(candidate: str) -> bool:
-    if not candidate:
-        return True
-    all_list = load_json(ALL_INDEX)
-    for rec in all_list:
-        if str(rec.get("guid", "")).lower() == candidate.lower():
-            return False
-    return True
-
-# ---------- DROP IMAGE WIDGET ----------
 class DropImageLabel(QLabel):
     def __init__(self, on_image_selected, parent=None):
         super().__init__(parent)
+        self._on_image_selected = on_image_selected
         self.setAcceptDrops(True)
         self.setAlignment(Qt.AlignCenter)
-        self.setFixedSize(220, 220)
+        self.setWordWrap(True)
+        self.setMinimumSize(140, 140)
+        self.setMaximumHeight(180)
         self.setFrameShape(QFrame.StyledPanel)
-        self.setText("Перетащи иконку сюда\nили нажми «Выбрать файл»")
-        self._on_image_selected = on_image_selected
-        self._current_path: Path | None = None
+        self.clear_image()
 
+    def dragEnterEvent(self, event):
+        if any(u.isLocalFile() and Path(u.toLocalFile()).suffix.lower() in {".png", ".jpg", ".jpeg", ".webp"}
+               for u in event.mimeData().urls()):
+            event.acceptProposedAction()
 
-    def dragEnterEvent(self, event: QDragEnterEvent):
-        mime: QMimeData = event.mimeData()
-        if mime.hasUrls():
-            for url in mime.urls():
-                if url.isLocalFile() and Path(url.toLocalFile()).suffix.lower() in {".png", ".jpg", ".jpeg", ".webp"}:
-                    event.acceptProposedAction()
-                    return
-        event.ignore()
-
-    def dropEvent(self, event: QDropEvent):
+    def dropEvent(self, event):
         for url in event.mimeData().urls():
-            local = Path(url.toLocalFile())
-            if local.suffix.lower() in {".png", ".jpg", ".jpeg", ".webp"}:
-                self.set_image(local)
-                try:
-                    self._on_image_selected(local)
-                except Exception:
-                    pass
+            if url.isLocalFile() and self.set_image(Path(url.toLocalFile())):
+                self._on_image_selected(Path(url.toLocalFile()))
+                event.acceptProposedAction()
                 break
 
-    def set_image(self, path: Path):
-        self._current_path = path
-        pix = QPixmap(str(path))
-        if not pix.isNull():
-            self.setPixmap(pix.scaled(self.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation))
-        else:
-            self.setText("Не удалось открыть изображение")
+    def set_image(self, path):
+        pixmap = QPixmap(str(path))
+        if pixmap.isNull():
+            return False
+        self.setPixmap(pixmap.scaled(160, 140, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+        return True
 
     def clear_image(self):
-        self._current_path = None
         self.setPixmap(QPixmap())
-        self.setText("Перетащи иконку сюда\nили нажми «Выбрать файл»")
+        self.setText("Перетащите изображение сюда")
 
-# ---------- AddCustomizationWindow ----------
+
 class AddCustomizationWindow(QWidget):
-    """
-    Окно добавления кастомизации.
-    Поведение:
-      - При создании устанавливается self.on_saved_callback = None (внешнее окно назначает его при открытии)
-      - После сохранения вызывает on_saved_callback() если установлен
-      - Сохраняет последние выбранные category/subcategory/type в класс-переменных
-      - Кнопка Очистить очищает полностью (если нужно) или частично
-    """
-    last_category: str = ""
-    last_subcategory: str = ""
-    last_type: str = ""
+    saved = Signal(object)
+    deleted = Signal(object)
+    cancelled = Signal()
 
-    def __init__(self):
-        super().__init__()
-        ensure_dirs()
-        self.on_saved_callback = None  # <- внешний код может назначить callback
-
-        self.setWindowTitle("Добавление кастомизации")
-        self.setMinimumWidth(600)
-
-        # выбранные файлы иконок
-        self.selected_main_icon: Path | None = None
-        self.selected_sub_icon: Path | None = None
-
-        # --- UI поля ---
+    def __init__(self, catalog, record=None, parent=None):
+        super().__init__(parent)
+        self.catalog = catalog
+        self.record = dict(record) if record else None
+        self.selected_main_icon = self.selected_sub_icon = None
+        self.is_saving = False
+        self._save_task = None
+        self.pages = QStackedWidget()
+        outer = QVBoxLayout(self)
+        outer.setContentsMargins(0, 0, 0, 0)
+        outer.addWidget(self.pages)
+        self.busy_label = QLabel("Сохранение…")
+        self.progress = QProgressBar()
+        self.progress.setRange(0, 0)
+        self.progress.setTextVisible(False)
+        outer.addWidget(self.busy_label)
+        outer.addWidget(self.progress)
+        self.busy_label.hide()
+        self.progress.hide()
+        form = QWidget()
+        layout = QVBoxLayout(form)
+        title = QLabel("Редактирование элемента" if record else "Добавление элемента")
+        title.setStyleSheet("font-size: 18px; font-weight: bold")
+        layout.addWidget(title)
         self.input_name = QLineEdit()
-        self.input_name.setPlaceholderText("Название элемента (обязательно)")
-
         self.input_guid = QLineEdit()
-        self.input_guid.setPlaceholderText("GUID (обязательно, формат UUID)")
-
+        self.input_guid.setPlaceholderText("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx")
+        self.input_guid.setReadOnly(bool(record))
         self.combo_category = QComboBox()
         self.combo_category.setEditable(True)
-        self.combo_category.addItems(list_categories())
-        self.combo_category.currentTextChanged.connect(self._category_changed)
-
+        self.combo_category.addItems(catalog.categories())
         self.combo_subcat = QComboBox()
         self.combo_subcat.setEditable(True)
-
         self.combo_type = QComboBox()
-        self.combo_type.setEditable(False)
-        self.combo_type.addItems(["<Не указано>"] + DEFAULT_TYPES)
+        self.combo_type.setEditable(True)
+        self.combo_type.addItems(catalog.types())
+        for label, field in (("Название", self.input_name), ("GUID", self.input_guid),
+                             ("Категория", self.combo_category), ("Подкатегория", self.combo_subcat),
+                             ("Тип кастомизации", self.combo_type)):
+            layout.addWidget(QLabel(label))
+            layout.addWidget(field)
+        self.combo_category.currentTextChanged.connect(self._category_changed)
+        self._category_changed(self.combo_category.currentText())
+        images = QHBoxLayout()
+        self.preview_main = DropImageLabel(self._select_main)
+        self.preview_sub = DropImageLabel(self._select_sub)
+        for label, preview, kind in (("Иконка элемента", self.preview_main, "main"),
+                                     ("Иконка подкатегории", self.preview_sub, "sub")):
+            column = QVBoxLayout()
+            column.addWidget(QLabel(label))
+            column.addWidget(preview)
+            button = QPushButton("Выбрать файл…")
+            button.clicked.connect(lambda checked=False, k=kind: self._pick_icon(k))
+            column.addWidget(button)
+            images.addLayout(column)
+        layout.addLayout(images)
+        self.message = QLabel()
+        self.message.setWordWrap(True)
+        layout.addWidget(self.message)
+        buttons = QVBoxLayout()
+        buttons.setSpacing(8)
+        save = QPushButton("Сохранить")
+        save.clicked.connect(self._save)
+        cancel = QPushButton("Назад к GUID")
+        cancel.clicked.connect(self.cancelled.emit)
+        for button in (save, cancel):
+            button.setMinimumHeight(44)
+        buttons.addWidget(save)
+        buttons.addWidget(cancel)
+        if self.record:
+            delete = QPushButton("Удалить элемент…")
+            delete.setMinimumHeight(44)
+            delete.clicked.connect(self._delete)
+            buttons.addWidget(delete)
+        layout.addLayout(buttons)
+        layout.addStretch()
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setWidget(form)
+        self.pages.addWidget(scroll)
+        if record:
+            self.input_name.setText(record.get("name", ""))
+            self.input_guid.setText(record.get("guid", ""))
+            self.combo_category.setCurrentText(record.get("category", ""))
+            self.combo_subcat.setCurrentText(record.get("subcategory") or "")
+            self.combo_type.setCurrentText(record.get("type", ""))
+            icon = catalog.icon(record)
+            if icon:
+                self.preview_main.set_image(icon)
+            folder = catalog.icons_dir / record.get("category", "") / (record.get("subcategory") or "")
+            for ext in (".png", ".jpg", ".jpeg", ".webp"):
+                if (folder / f"icon{ext}").is_file():
+                    self.preview_sub.set_image(folder / f"icon{ext}")
+                    break
 
-        # Иконки (drop)
-        self.preview_main = DropImageLabel(self._on_main_icon_selected)
-        btn_main_icon = QPushButton("Выбрать иконку элемента…")
-        btn_main_icon.clicked.connect(self._pick_main_icon)
-
-        self.preview_sub = DropImageLabel(self._on_sub_icon_selected)
-        btn_sub_icon = QPushButton("Выбрать иконку подкатегории…")
-        btn_sub_icon.clicked.connect(self._pick_sub_icon)
-
-        # Действия
-        btn_save = QPushButton("Сохранить")
-        btn_save.clicked.connect(self._save)
-
-        btn_clear = QPushButton("Очистить")
-        btn_clear.clicked.connect(self._clear_form_full)
-
-        # Сборка layout
-        left = QVBoxLayout()
-        left.addWidget(QLabel("Название"))
-        left.addWidget(self.input_name)
-        left.addSpacing(6)
-        left.addWidget(QLabel("GUID"))
-        left.addWidget(self.input_guid)
-        left.addSpacing(6)
-        left.addWidget(QLabel("Категория"))
-        left.addWidget(self.combo_category)
-        left.addSpacing(6)
-        left.addWidget(QLabel("Подкатегория"))
-        left.addWidget(self.combo_subcat)
-        left.addSpacing(6)
-        left.addWidget(QLabel("Тип кастомизации"))
-        left.addWidget(self.combo_type)
-        left.addSpacing(12)
-        row_actions = QHBoxLayout()
-        row_actions.addWidget(btn_save)
-        row_actions.addWidget(btn_clear)
-        left.addLayout(row_actions)
-        left.addStretch(1)
-
-        right = QVBoxLayout()
-        right.addWidget(QLabel("Иконка элемента"))
-        right.addWidget(self.preview_main)
-        right.addWidget(btn_main_icon)
-        right.addSpacing(12)
-        right.addWidget(QLabel("Иконка подкатегории"))
-        right.addWidget(self.preview_sub)
-        right.addWidget(btn_sub_icon)
-        right.addStretch(1)
-
-        root = QHBoxLayout()
-        root.addLayout(left, 1)
-        root.addLayout(right, 1)
-        self.setLayout(root)
-
-        # Восстанавливаем последние выбранные значения (если есть)
-        self._restore_last_values()
-        self.adjustSize()
-        self.setFixedSize(self.size())
-
-    # ---------- вспомогательные ----------
-    def _restore_last_values(self):
-        self._restoring = True  # <-- добавили
-        try:
-            if AddCustomizationWindow.last_category:
-                self.combo_category.setEditText(AddCustomizationWindow.last_category)
-                self._category_changed(AddCustomizationWindow.last_category)
-
-            if AddCustomizationWindow.last_subcategory:
-                self.combo_subcat.setEditText(AddCustomizationWindow.last_subcategory)
-
-            if AddCustomizationWindow.last_type:
-                idx = self.combo_type.findText(AddCustomizationWindow.last_type)
-                if idx >= 0:
-                    self.combo_type.setCurrentIndex(idx)
-        finally:
-            self._restoring = False  # <-- снимаем флаг
-
-    def _category_changed(self, cat_name: str):
-        # если мы ВРУЧНУЮ меняем категорию → подкатегорию сбрасываем
-        # но если мы восстанавливаем значения (restore), то подкатегория НЕ сбросится
-        restoring = getattr(self, "_restoring", False)
-
-        current_sub = self.combo_subcat.currentText().strip()
-
-        self.combo_subcat.blockSignals(True)
+    def _category_changed(self, category):
         self.combo_subcat.clear()
+        self.combo_subcat.addItems(self.catalog.subcategories(category))
+        self.combo_subcat.setCurrentText("")
 
-        subcats = list_subcategories(cat_name)
-        self.combo_subcat.addItems(subcats)
-
-        if restoring and current_sub:
-            # при восстановлении подставляем прежнюю подкатегорию
-            self.combo_subcat.setEditText(current_sub)
-        else:
-            # при ручной смене категории сбрасываем
-            self.combo_subcat.setEditText("")
-
-        self.combo_subcat.blockSignals(False)
-
-    def _update_subcat_items(self, category: str):
-        self.combo_subcat.clear()
-        if category:
-            subs = list_subcategories(category)
-            self.combo_subcat.addItems(subs)
-        # оставляем текст в editable, если пользователь уже ввёл что-то
-        # ничего дополнительно не трогаем
-
-    # ---------- работа с иконками ----------
-    def _pick_main_icon(self):
-        path, _ = QFileDialog.getOpenFileName(self, "Выбрать иконку элемента", str(PROJECT_ROOT),
-                                              "Изображения (*.png *.jpg *.jpeg *.webp)")
-        if path:
-            p = Path(path)
-            self.preview_main.set_image(p)
-            self._on_main_icon_selected(p)
-
-    def _pick_sub_icon(self):
-        path, _ = QFileDialog.getOpenFileName(self, "Выбрать иконку подкатегории", str(PROJECT_ROOT),
-                                              "Изображения (*.png *.jpg *.jpeg *.webp)")
-        if path:
-            p = Path(path)
-            self.preview_sub.set_image(p)
-            self._on_sub_icon_selected(p)
-
-    def _on_main_icon_selected(self, path: Path):
+    def _select_main(self, path):
         self.selected_main_icon = path
 
-    def _on_sub_icon_selected(self, path: Path):
+    def _select_sub(self, path):
         self.selected_sub_icon = path
 
-    # ---------- GUID валидация ----------
-    def _get_valid_guid(self) -> str | None:
-        txt = self.input_guid.text().strip()
-        if not txt:
-            # требуем GUID по дизайну — пользователь должен ввести UUID
-            QMessageBox.warning(self, "Ошибка", "GUID обязателен. Введите значение (UUID).")
-            return None
-        try:
-            g = str(uuid.UUID(txt))
-        except Exception:
-            QMessageBox.warning(self, "Ошибка", "GUID имеет неверный формат.")
-            return None
-        if not is_guid_unique(g):
-            QMessageBox.warning(self, "Ошибка", "Такой GUID уже существует.")
-            return None
-        return g
+    def _pick_icon(self, kind):
+        picker = QFileDialog(self, Qt.Widget)
+        picker.setOption(QFileDialog.DontUseNativeDialog, True)
+        picker.setWindowFlags(Qt.Widget)
+        picker.setFileMode(QFileDialog.ExistingFile)
+        picker.setNameFilter("Изображения (*.png *.jpg *.jpeg *.webp)")
+        picker.setDirectory(str(self.catalog.root))
+        self.pages.addWidget(picker)
+        self.pages.setCurrentWidget(picker)
 
-    # ---------- сохранение ----------
+        def finish(accepted):
+            if accepted and picker.selectedFiles():
+                path = Path(picker.selectedFiles()[0])
+                preview = self.preview_main if kind == "main" else self.preview_sub
+                if preview.set_image(path):
+                    (self._select_main if kind == "main" else self._select_sub)(path)
+                else:
+                    self.message.setText("Не удалось открыть изображение.")
+            self.pages.setCurrentIndex(0)
+            self.pages.removeWidget(picker)
+            picker.deleteLater()
+
+        picker.accepted.connect(lambda: finish(True))
+        picker.rejected.connect(lambda: finish(False))
+
     def _save(self):
-        name = self.input_name.text().strip()
-        category = self.combo_category.currentText().strip()
-        subcat = self.combo_subcat.currentText().strip() or None
-        ctype = self.combo_type.currentText().strip()
-        if ctype == "<Не указано>":
-            ctype = ""
-
-        if not name:
-            return self._err("Заполни название.")
-        if not category:
-            return self._err("Укажи категорию.")
-        if not ctype:
-            return self._err("Выбери тип кастомизации.")
-        if not self.selected_main_icon:
-            return self._err("Добавь иконку элемента.")
-
-        guid = self._get_valid_guid()
-        if not guid:
+        if self.is_saving:
             return
+        record = dict(self.record or {})
+        record.update(name=self.input_name.text().strip(), guid=self.input_guid.text().strip(),
+                      category=self.combo_category.currentText().strip(),
+                      subcategory=self.combo_subcat.currentText().strip() or None,
+                      type=self.combo_type.currentText().strip())
+        self._start_write(record)
 
-        # Сохраняем последние выбранные значения (для последующего добавления)
-        AddCustomizationWindow.last_category = category
-        AddCustomizationWindow.last_subcategory = subcat or ""
-        AddCustomizationWindow.last_type = ctype
+    def _confirm_delete(self):
+        confirmation = QMessageBox(self)
+        confirmation.setWindowTitle("Удаление элемента")
+        confirmation.setIcon(QMessageBox.Warning)
+        confirmation.setTextFormat(Qt.PlainText)
+        confirmation.setText(f'Удалить элемент «{self.record["name"]}»?')
+        confirmation.setInformativeText(f'GUID: {self.record["guid"]}\nЭлемент будет удалён из каталога текущего проекта.')
+        delete = confirmation.addButton("Удалить", QMessageBox.DestructiveRole)
+        cancel = confirmation.addButton("Отмена", QMessageBox.RejectRole)
+        confirmation.setDefaultButton(cancel)
+        confirmation.setEscapeButton(cancel)
+        confirmation.exec()
+        return confirmation.clickedButton() is delete
 
-        # Папки для иконок
-        cat_dir = ASSETS_DIR / category
-        if subcat:
-            cat_dir = cat_dir / subcat
-        cat_dir.mkdir(parents=True, exist_ok=True)
+    def _delete(self):
+        if self.is_saving or not self.record:
+            return
+        if self._confirm_delete():
+            self._start_write(dict(self.record), operation="delete")
 
-        # Копируем основную иконку
-        main_ext = self.selected_main_icon.suffix.lower()
-        main_dst = cat_dir / f"{guid}{main_ext}"
-        shutil.copy2(self.selected_main_icon, main_dst)
+    def _start_write(self, record, operation="save"):
+        self.is_saving = True
+        self.busy_label.setText("Удаление…" if operation == "delete" else "Сохранение…")
+        self.pages.setEnabled(False)
+        self.message.clear()
+        self.busy_label.show()
+        self.progress.show()
+        self._save_task = CatalogWriteTask(self.catalog, record, self.selected_main_icon,
+                                           self.selected_sub_icon, self.record, self, operation)
+        self._save_task.finished.connect(self._save_finished)
+        self._save_task.start()
 
-        # Копируем иконку подкатегории если указана и пользователь выбрал файл для подкатегории
-        if self.selected_sub_icon and subcat:
-            sub_ext = self.selected_sub_icon.suffix.lower()
-            sub_dst = cat_dir / f"icon{sub_ext}"
-            shutil.copy2(self.selected_sub_icon, sub_dst)
-
-        now = datetime.now(timezone.utc).isoformat()
-        record = {
-            "guid": guid,
-            "name": name,
-            "category": category,
-            "subcategory": subcat,
-            "type": ctype,
-            "icon_path": str(main_dst.relative_to(PROJECT_ROOT).as_posix()),
-            "created_at": now,
-        }
-
-        # Сохраняем в файл категории
-        cat_file = DATA_DIR / f"{category}.json"
-        cat_list = load_json(cat_file)
-        cat_list.append(record)
-        save_json(cat_file, cat_list)
-
-        # Сохраняем в общий индекс
-        all_list = load_json(ALL_INDEX)
-        all_list.append(record)
-        save_json(ALL_INDEX, all_list)
-
-        # Обновляем список подкатегорий (чтобы новая появилась сразу)
-        self._update_subcat_items(category)
-
-        QMessageBox.information(self, "Готово", f"Элемент сохранён ✅\nGUID: {guid}")
-
-        # Вызов callback у внешнего окна (например, GuidSearchWindow) для обновления дерева
-        try:
-            if self.on_saved_callback:
-                self.on_saved_callback()
-        except Exception:
-            pass
-
-        # После сохранения очищаем всё кроме категории/subcategory/type
-        self._clear_after_save()
-
-    # ---------- очистка формы ----------
-    def _clear_after_save(self):
-        # Очищаем название, GUID и иконки, но оставляем категорию/подкатегорию/тип
-        self.input_name.clear()
-        self.input_guid.clear()
-
-        self.preview_main.clear_image()
-        self.preview_sub.clear_image()
-
-        self.selected_main_icon = None
-        self.selected_sub_icon = None
-
-    def _clear_form_full(self):
-        # Полное очищение — полностью сбрасываем все поля, включая категорию/подкатегорию/тип
-        self.input_name.clear()
-        self.input_guid.clear()
-        self.combo_category.setCurrentIndex(0) if self.combo_category.count() > 0 else self.combo_category.setEditText("")
-        self.combo_subcat.clear()
-        self.combo_type.setCurrentIndex(0)
-
-        self.preview_main.clear_image()
-        self.preview_sub.clear_image()
-
-        self.selected_main_icon = None
-        self.selected_sub_icon = None
-
-        # сбрасываем последние сохранённые значения
-        AddCustomizationWindow.last_category = ""
-        AddCustomizationWindow.last_subcategory = ""
-        AddCustomizationWindow.last_type = ""
-
-    # ---------- ошибки ----------
-    def _err(self, msg: str):
-        QMessageBox.warning(self, "Ошибка", msg)
-
-# ---------- standalone launch ----------
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    w = AddCustomizationWindow()
-    w.show()
-    sys.exit(app.exec())
+    @Slot()
+    def _save_finished(self):
+        task = self._save_task
+        self._save_task = None
+        self.is_saving = False
+        self.pages.setEnabled(True)
+        self.busy_label.hide()
+        self.progress.hide()
+        task.deleteLater()
+        if task.error is not None:
+            action = "удалить" if task.operation == "delete" else "сохранить"
+            self.message.setText(f"Не удалось {action}: {task.error}")
+            return
+        if task.operation == "delete":
+            self.deleted.emit(task.result)
+            return
+        if not self.record:
+            self.input_name.clear()
+            self.input_guid.clear()
+            self.selected_main_icon = self.selected_sub_icon = None
+            self.preview_main.clear_image()
+            self.preview_sub.clear_image()
+        self.message.setText("Элемент сохранён.")
+        self.saved.emit(task.result)

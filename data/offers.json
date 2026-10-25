@@ -196,5 +196,140 @@
     "type": "stickers",
     "icon_path": "assets/icons/offers/Day Of The Dead/2a51e1fb-a87b-430f-9a57-4438735fedfd.png",
     "created_at": "2025-11-23T21:06:44.411617+00:00"
+  },
+  {
+    "guid": "ffc78bac-8ac9-40d3-ae64-239a2f2830fe",
+    "name": "Hat Soldier Epic",
+    "category": "offers",
+    "subcategory": "Skull Soldier",
+    "type": "hat",
+    "icon_path": "assets/icons/offers/ffc78bac-8ac9-40d3-ae64-239a2f2830fe.png",
+    "created_at": "2025-12-07T15:09:13.236385+00:00"
+  },
+  {
+    "guid": "fc111ccd-674f-4c06-8d2a-e1bbcebf601b",
+    "name": "Hat Drunk Legendary",
+    "category": "offers",
+    "subcategory": "Drink Arsenal",
+    "type": "hat",
+    "icon_path": "assets/icons/offers/Drink Arsenal/fc111ccd-674f-4c06-8d2a-e1bbcebf601b.png",
+    "created_at": "2025-12-07T15:10:25.879831+00:00"
+  },
+  {
+    "guid": "ca2cea0a-f81b-4015-9a24-a1507865e10a",
+    "name": "Hat Sensei Legendary",
+    "category": "offers",
+    "subcategory": "Sensei",
+    "type": "hat",
+    "icon_path": "assets/icons/offers/Sensei/ca2cea0a-f81b-4015-9a24-a1507865e10a.png",
+    "created_at": "2025-12-07T15:10:55.882040+00:00"
+  },
+  {
+    "guid": "0e950cff-2fa0-4071-adc1-0183934d971c",
+    "name": "Bow Soldier Legendary",
+    "category": "offers",
+    "subcategory": "Skull Soldier",
+    "type": "bow",
+    "icon_path": "assets/icons/offers/Skull Soldier/0e950cff-2fa0-4071-adc1-0183934d971c.png",
+    "created_at": "2025-12-07T15:12:04.479880+00:00"
+  },
+  {
+    "guid": "4a2c013a-8c58-4543-a86e-cfb0d59675ba",
+    "name": "Bow Drunk Legendary",
+    "category": "offers",
+    "subcategory": "Drink Arsenal",
+    "type": "bow",
+    "icon_path": "assets/icons/offers/Drink Arsenal/4a2c013a-8c58-4543-a86e-cfb0d59675ba.png",
+    "created_at": "2025-12-07T15:12:22.901132+00:00"
+  },
+  {
+    "guid": "5e061cd4-7447-4fc3-acb0-6c74020d5852",
+    "name": "Sticker Drunk 1",
+    "category": "offers",
+    "subcategory": "Drink Arsenal",
+    "type": "stickers",
+    "icon_path": "assets/icons/offers/Drink Arsenal/5e061cd4-7447-4fc3-acb0-6c74020d5852.png",
+    "created_at": "2025-12-07T15:12:51.143539+00:00"
+  },
+  {
+    "guid": "54622665-b1de-421d-a653-fc03f01701ea",
+    "name": "Sticker Drunk 2",
+    "category": "offers",
+    "subcategory": "Drink Arsenal",
+    "type": "stickers",
+    "icon_path": "assets/icons/offers/Drink Arsenal/54622665-b1de-421d-a653-fc03f01701ea.png",
+    "created_at": "2025-12-07T15:13:02.617262+00:00"
+  },
+  {
+    "guid": "73d08ff5-a5f1-4f4e-b051-6eb53522d1ea",
+    "name": "Sticker Drunk 3",
+    "category": "offers",
+    "subcategory": "Drink Arsenal",
+    "type": "stickers",
+    "icon_path": "assets/icons/offers/Drink Arsenal/73d08ff5-a5f1-4f4e-b051-6eb53522d1ea.png",
+    "created_at": "2025-12-07T15:13:12.745150+00:00"
+  },
+  {
+    "guid": "95c221b7-f221-42a8-9b28-e8e669d5efb4",
+    "name": "Sticker Skull Soldier 1",
+    "category": "offers",
+    "subcategory": "Skull Soldier",
+    "type": "stickers",
+    "icon_path": "assets/icons/offers/Skull Soldier/95c221b7-f221-42a8-9b28-e8e669d5efb4.png",
+    "created_at": "2025-12-07T15:13:29.882621+00:00"
+  },
+  {
+    "guid": "698cfa99-d325-4027-b9b4-0bbe9edec7f2",
+    "name": "Sticker Skull Soldier 2",
+    "category": "offers",
+    "subcategory": "Skull Soldier",
+    "type": "stickers",
+    "icon_path": "assets/icons/offers/Skull Soldier/698cfa99-d325-4027-b9b4-0bbe9edec7f2.png",
+    "created_at": "2025-12-07T15:13:40.530645+00:00"
+  },
+  {
+    "guid": "17245917-21b3-4f49-9da4-ed6f6d19a8be",
+    "name": "Sticker Sensei 1",
+    "category": "offers",
+    "subcategory": "Sensei",
+    "type": "stickers",
+    "icon_path": "assets/icons/offers/Sensei/17245917-21b3-4f49-9da4-ed6f6d19a8be.png",
+    "created_at": "2025-12-07T15:14:10.932318+00:00"
+  },
+  {
+    "guid": "df6e8c50-9d08-459d-a791-2cb751bd05f3",
+    "name": "Sticker Sensei 2",
+    "category": "offers",
+    "subcategory": "Sensei",
+    "type": "stickers",
+    "icon_path": "assets/icons/offers/Sensei/df6e8c50-9d08-459d-a791-2cb751bd05f3.png",
+    "created_at": "2025-12-07T15:14:20.718378+00:00"
+  },
+  {
+    "guid": "3a7c54e6-3d5c-4ce2-88b1-13ae398c8bc4",
+    "name": "Glasses Sensei Epic",
+    "category": "offers",
+    "subcategory": "Sensei",
+    "type": "glasses",
+    "icon_path": "assets/icons/offers/Sensei/3a7c54e6-3d5c-4ce2-88b1-13ae398c8bc4.png",
+    "created_at": "2025-12-07T15:14:48.577454+00:00"
+  },
+  {
+    "guid": "b6440af8-1b34-4600-946b-02482505b80d",
+    "name": "Beard Sensei Epic",
+    "category": "offers",
+    "subcategory": "Sensei",
+    "type": "beard",
+    "icon_path": "assets/icons/offers/Sensei/b6440af8-1b34-4600-946b-02482505b80d.png",
+    "created_at": "2025-12-07T15:15:12.718494+00:00"
+  },
+  {
+    "guid": "5e2d51ce-76ca-45db-aaec-5d765a8f234a",
+    "name": "Glasses Soldier Epic",
+    "category": "offers",
+    "subcategory": "Skull Soldier",
+    "type": "glasses",
+    "icon_path": "assets/icons/offers/Skull Soldier/5e2d51ce-76ca-45db-aaec-5d765a8f234a.png",
+    "created_at": "2025-12-07T15:16:06.559773+00:00"
   }
 ]

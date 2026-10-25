@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Swamp",
+    "guid": "67b36985-ce51-46dc-96ff-ced939d60e50",
+    "category": "maps",
+    "subcategory": null,
+    "type": "maps",
+    "icon_path": "assets/icons/maps/67b36985-ce51-46dc-96ff-ced939d60e50.png",
+    "created_at": "2026-10-25T18:26:07.838899+00:00"
+  },
+  {
+    "name": "Vulcan",
+    "guid": "2355c80b-7cc0-4b67-b748-6dc07698effc",
+    "category": "maps",
+    "subcategory": null,
+    "type": "maps",
+    "icon_path": "assets/icons/maps/2355c80b-7cc0-4b67-b748-6dc07698effc.png",
+    "created_at": "2026-10-25T18:32:45.174287+00:00"
+  },
+  {
+    "name": "Castle",
+    "guid": "6030d78a-6dcf-4d56-bbaa-cb486a03f509",
+    "category": "maps",
+    "subcategory": null,
+    "type": "maps",
+    "icon_path": "assets/icons/maps/6030d78a-6dcf-4d56-bbaa-cb486a03f509.png",
+    "created_at": "2026-10-25T18:33:09.531621+00:00"
+  },
+  {
+    "name": "Ice",
+    "guid": "58dfaa6a-7b76-4459-b60b-9ea42bb90801",
+    "category": "maps",
+    "subcategory": null,
+    "type": "maps",
+    "icon_path": "assets/icons/maps/58dfaa6a-7b76-4459-b60b-9ea42bb90801.png",
+    "created_at": "2026-10-25T18:33:18.642518+00:00"
+  },
+  {
+    "name": "Jungle",
+    "guid": "671102b8-e096-41d6-a79c-b2231f34a339",
+    "category": "maps",
+    "subcategory": null,
+    "type": "maps",
+    "icon_path": "assets/icons/maps/671102b8-e096-41d6-a79c-b2231f34a339.png",
+    "created_at": "2026-10-25T18:33:32.869730+00:00"
+  },
+  {
+    "name": "Mushrooms",
+    "guid": "28d75f20-6f98-4108-ac19-0021f244d1b9",
+    "category": "maps",
+    "subcategory": null,
+    "type": "maps",
+    "icon_path": "assets/icons/maps/28d75f20-6f98-4108-ac19-0021f244d1b9.png",
+    "created_at": "2026-10-25T18:34:00.530836+00:00"
+  }
+]

@@ -88,5 +88,140 @@
     "type": "bow",
     "icon_path": "assets/icons/events/PrizeRange/8d0a410d-f775-4758-bf70-2cbe7db7df38.png",
     "created_at": "2025-11-23T17:55:52.696736+00:00"
+  },
+  {
+    "guid": "68393009-f34e-4db6-8618-26770f26b07f",
+    "name": "Sticker Web 3",
+    "category": "events",
+    "subcategory": "Spider Hunt",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Spider Hunt/68393009-f34e-4db6-8618-26770f26b07f.png",
+    "created_at": "2025-12-29T12:40:47.192655+00:00"
+  },
+  {
+    "guid": "4f64d1d4-c54c-4db2-bca0-839cc95b5606",
+    "name": "Sticker Web 4",
+    "category": "events",
+    "subcategory": "Spider Hunt",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Spider Hunt/4f64d1d4-c54c-4db2-bca0-839cc95b5606.png",
+    "created_at": "2025-12-29T12:41:03.913608+00:00"
+  },
+  {
+    "guid": "53ee0dd6-4eae-45bf-a17f-2cc1d02edc15",
+    "name": "Sticker Web 5",
+    "category": "events",
+    "subcategory": "Spider Hunt",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Spider Hunt/53ee0dd6-4eae-45bf-a17f-2cc1d02edc15.png",
+    "created_at": "2025-12-29T12:41:18.036643+00:00"
+  },
+  {
+    "guid": "87bcb788-21cf-4c5e-8e73-3999a99dfc4e",
+    "name": "Sticker Web 6",
+    "category": "events",
+    "subcategory": "Spider Hunt",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Spider Hunt/87bcb788-21cf-4c5e-8e73-3999a99dfc4e.png",
+    "created_at": "2025-12-29T12:41:35.943818+00:00"
+  },
+  {
+    "guid": "27fda85b-2353-4e50-89b2-08a9379930ca",
+    "name": "Sticker Web 7",
+    "category": "events",
+    "subcategory": "Spider Hunt",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Spider Hunt/27fda85b-2353-4e50-89b2-08a9379930ca.png",
+    "created_at": "2025-12-29T12:41:53.086281+00:00"
+  },
+  {
+    "guid": "5794c84d-475b-4677-9ccb-140373718c22",
+    "name": "Sticker Jungle Wildman No 1",
+    "category": "events",
+    "subcategory": "Jungle Hunt",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Jungle Hunt/5794c84d-475b-4677-9ccb-140373718c22.png",
+    "created_at": "2025-12-29T12:42:32.641974+00:00"
+  },
+  {
+    "guid": "a4f319bd-1135-434e-8efe-d85ff9b6cfbd",
+    "name": "Sticker Jungle Wildman No 2",
+    "category": "events",
+    "subcategory": "Jungle Hunt",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Jungle Hunt/a4f319bd-1135-434e-8efe-d85ff9b6cfbd.png",
+    "created_at": "2025-12-29T12:42:46.633250+00:00"
+  },
+  {
+    "guid": "acaeb32e-eae8-4ff9-8bc8-0a61261e9a99",
+    "name": "Sticker Jungle Wildman No 3",
+    "category": "events",
+    "subcategory": "Jungle Hunt",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Jungle Hunt/acaeb32e-eae8-4ff9-8bc8-0a61261e9a99.png",
+    "created_at": "2025-12-29T12:42:58.492947+00:00"
+  },
+  {
+    "guid": "4bcaf29f-6627-4163-997f-7c31d4de6630",
+    "name": "Sticker Jungle Wildman No 4",
+    "category": "events",
+    "subcategory": "Jungle Hunt",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Jungle Hunt/4bcaf29f-6627-4163-997f-7c31d4de6630.png",
+    "created_at": "2025-12-29T12:43:08.662450+00:00"
+  },
+  {
+    "guid": "1838741d-07ce-4c10-8b58-93ee1ee81b24",
+    "name": "Sticker Jungle Wildman No 5",
+    "category": "events",
+    "subcategory": "Jungle Hunt",
+    "type": "stickers",
+    "icon_path": "assets/icons/events/Jungle Hunt/1838741d-07ce-4c10-8b58-93ee1ee81b24.png",
+    "created_at": "2025-12-29T12:43:21.649892+00:00"
+  },
+  {
+    "guid": "54f7ea46-6702-4786-ba81-bd155206a79c",
+    "name": "Body Jungle Wildman Legendary",
+    "category": "events",
+    "subcategory": "Jungle Hunt",
+    "type": "body",
+    "icon_path": "assets/icons/events/Jungle Hunt/54f7ea46-6702-4786-ba81-bd155206a79c.png",
+    "created_at": "2025-12-29T12:43:50.501728+00:00"
+  },
+  {
+    "guid": "f94f10b5-5052-427d-86b8-c6c459833744",
+    "name": "Bow Jungle Wildman Legendary",
+    "category": "events",
+    "subcategory": "Jungle Hunt",
+    "type": "bow",
+    "icon_path": "assets/icons/events/Jungle Hunt/f94f10b5-5052-427d-86b8-c6c459833744.png",
+    "created_at": "2025-12-29T12:44:12.904721+00:00"
+  },
+  {
+    "guid": "08dab424-428f-4187-98c1-03319920b42f",
+    "name": "Hat Jungle Wildman Epic",
+    "category": "events",
+    "subcategory": "Jungle Hunt",
+    "type": "hat",
+    "icon_path": "assets/icons/events/Jungle Hunt/08dab424-428f-4187-98c1-03319920b42f.png",
+    "created_at": "2025-12-29T12:44:47.419955+00:00"
+  },
+  {
+    "guid": "cd2bb1f5-4508-43b5-80a2-3a4e6b2b229e",
+    "name": "Beard Jungle Wildman Rare",
+    "category": "events",
+    "subcategory": "Jungle Hunt",
+    "type": "beard",
+    "icon_path": "assets/icons/events/Jungle Hunt/cd2bb1f5-4508-43b5-80a2-3a4e6b2b229e.png",
+    "created_at": "2025-12-29T12:45:15.439639+00:00"
+  },
+  {
+    "guid": "5f5cb119-9242-47b4-aece-32b1dc600e78",
+    "name": "Glasses Jungle Wildman Rare",
+    "category": "events",
+    "subcategory": "Jungle Hunt",
+    "type": "glasses",
+    "icon_path": "assets/icons/events/Jungle Hunt/5f5cb119-9242-47b4-aece-32b1dc600e78.png",
+    "created_at": "2025-12-29T12:45:46.693009+00:00"
   }
 ]
