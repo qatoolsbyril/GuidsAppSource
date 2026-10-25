@@ -7,7 +7,6 @@ from PySide6.QtWidgets import (QWidget, QTreeWidget, QTreeWidgetItem, QVBoxLayou
 from app.storage import ProjectManager
 from app.add_item import AddCustomizationWindow
 from app.edit_item import EditCustomizationWindow
-from app.project_settings import ProjectSettingsPanel
 
 
 class CustomizationItemDelegate(QStyledItemDelegate):
@@ -111,9 +110,6 @@ class GuidSearchWindow(QWidget):
     def _go_back(self):
         if self.editor is None or getattr(self.editor, "is_saving", False):
             return
-        if isinstance(self.editor, ProjectSettingsPanel):
-            self.editor.go_back()
-            return
         if isinstance(self.editor, AddCustomizationWindow):
             picker = self.editor.pages.currentWidget()
             if isinstance(picker, QFileDialog):
@@ -211,18 +207,13 @@ class GuidSearchWindow(QWidget):
             self._position_drawer(self._drawer_progress)
 
     def _open_project_form(self, editing):
-        if editing:
-            panel = ProjectSettingsPanel(self.manager, self.catalog.project["id"])
-            panel.changed.connect(self._reload_project_settings)
-            panel.cancelled.connect(self._close_editor)
-            self._set_editor(panel)
-            return
+        project = self.catalog.project if editing else None
         form = QWidget()
         form_layout = QVBoxLayout(form)
-        form_layout.addWidget(QLabel("Новый локальный проект"))
-        name = QLineEdit()
-        categories = QPlainTextEdit()
-        types = QPlainTextEdit()
+        form_layout.addWidget(QLabel("Настройки проекта" if editing else "Новый локальный проект"))
+        name = QLineEdit(project["name"] if project else "")
+        categories = QPlainTextEdit("\n".join(project["categories"]) if project else "")
+        types = QPlainTextEdit("\n".join(project["types"]) if project else "")
         for label, field in (("Название проекта", name), ("Категории — по одной на строку", categories),
                              ("Типы кастомизации — по одному на строку", types)):
             form_layout.addWidget(QLabel(label))
@@ -231,7 +222,7 @@ class GuidSearchWindow(QWidget):
         message = QLabel()
         message.setWordWrap(True)
         form_layout.addWidget(message)
-        save = QPushButton("Создать проект")
+        save = QPushButton("Сохранить проект" if editing else "Создать проект")
         back = QPushButton("Назад к GUID")
         back.clicked.connect(self._close_editor)
         for button in (save, back):
@@ -242,7 +233,7 @@ class GuidSearchWindow(QWidget):
         def commit():
             try:
                 result = self.manager.save_project(name.text(), categories.toPlainText().splitlines(),
-                    types.toPlainText().splitlines())
+                    types.toPlainText().splitlines(), project["id"] if project else None)
             except (ValueError, OSError) as error:
                 message.setText(str(error))
                 return
@@ -258,11 +249,6 @@ class GuidSearchWindow(QWidget):
         scroll.setWidgetResizable(True)
         scroll.setWidget(form)
         self._set_editor(scroll)
-
-    def _reload_project_settings(self):
-        self.catalog = self.manager.catalog(self.catalog.project["id"])
-        self._refresh_projects()
-        self._load_items_into_tree()
 
     def _load_items_into_tree(self):
         self.tree.clear()

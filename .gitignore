@@ -6,4 +6,3 @@ __pycache__/
 *.pyc
 projects.json
 projects/
-.catalog-backups/

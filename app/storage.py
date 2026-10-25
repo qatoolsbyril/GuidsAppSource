@@ -114,8 +114,7 @@ class Catalog:
         return sorted(set(self.project["types"]) | {r["type"] for r in self.items() if r.get("type")})
 
     def subcategories(self, category):
-        return sorted(set(self.project.get("subcategories", {}).get(category, [])) |
-                      {r["subcategory"] for r in self.items() if r.get("category") == category and r.get("subcategory")})
+        return sorted({r["subcategory"] for r in self.items() if r.get("category") == category and r.get("subcategory")})
 
     def icon(self, record):
         value = record.get("icon_path")
